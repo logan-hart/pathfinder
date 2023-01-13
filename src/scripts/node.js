@@ -1,9 +1,9 @@
-function Node(name, pos){   
+function Node(name, pos, status){   
     this.name = name
     this.pos = pos
     this.radius = 10
     this.neighbors = []
-    // this.status = status            which node to start/end pathing
+    this.status = null
     // this.size = size             used for creating a larger graph
 }
 
@@ -23,6 +23,5 @@ Node.prototype.move = function (pos){
     this.draw
 
 }
-
 
 module.exports = Node;
