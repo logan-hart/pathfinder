@@ -1,0 +1,7 @@
+/* REMEMBER to add CSS RESET!!!!!!*/
+
+
+#node-graph {                            /* drop shadow for laster */       
+    border: 1px black;
+    box-shadow: 25px 25px 30px darkgrey;
+}
