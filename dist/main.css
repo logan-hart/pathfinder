@@ -3,8 +3,7 @@
   \*********************************************************************************************************/
 /* REMEMBER to add CSS RESET!!!!!!*/
 
-
-#node-graph {                                   
+#canvas {                                   
     border-style: solid;
     border-width: 1px;
     box-shadow: 25px 25px 30px darkgrey;

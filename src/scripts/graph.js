@@ -46,30 +46,38 @@ Graph.prototype.placePaths = function (){
 
 Graph.prototype.draw = function(ctx){
     ctx.clearRect(0, 0, 970, 600)
-    ctx.fillStyle = "#d3d3d3";
+    ctx.fillStyle = "white";
     ctx.fillRect(0, 0, 970, 600);
     this.paths.forEach(function (path){
-        path.draw(ctx)
+        if (path.status !== 'visited'){
+            path.draw(ctx, 'black')
+        } else {
+            path.draw(ctx, 'green')
+        }
     })
     this.nodes.forEach(function(node){
-        node.draw(ctx)
+        if (node.status !== 'visited'){
+            node.draw(ctx, 'white')
+        } else {
+            node.draw(ctx, 'green')
+        }
     })
 }
 
 Graph.prototype.buildAssociations = function (){
-    let associations = {}
-    for (let i = 0; i < this.nodes.length; i++){
-        if (!associations[i]) associations[i] = {}
-    }
-    console.log(associations)
+    // let associations = {}
+    // for (let i = 0; i < this.nodes.length; i++){
+    //     if (!associations[i]) associations[i] = {}
+    // }
+    // console.log(associations)
 }
-
 
 
 // Graph.prototype.getRandomPositions = function(){
     // future implimentation for creating new 'maps' with 
     // minimum distance between other nodes and from border
 // }
+
 
 module.exports = Graph;
 
