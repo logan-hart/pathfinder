@@ -3,6 +3,7 @@ const Path = require("./scripts/path.js");
 const Graph = require("./scripts/graph.js")
 const Algorithm = require("./scripts/algorithm.js")
 
+
 document.addEventListener("DOMContentLoaded", function () {
     const canvas = document.getElementById("canvas");
     canvas.width = 970;
@@ -15,7 +16,8 @@ document.addEventListener("DOMContentLoaded", function () {
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, 970, 600);
  
-    g = new Graph()
+    ani = new Algorithm
+    ani.begin()
 
 
     function selectStart(){

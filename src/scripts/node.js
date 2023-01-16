@@ -2,7 +2,7 @@ function Node(name, pos){
     this.name = name
     this.pos = pos
     this.radius = 10
-    this.neighbors = []
+    this.neighbors = {}
     this.status = 'unvisited'
     // this.size = size             used for creating a larger graph
 }
@@ -17,6 +17,9 @@ Node.prototype.draw = function(ctx, color){
     ctx.fill();
 }
 
+function nodeExp(){
+    console.log("success")
+}
 
 
 

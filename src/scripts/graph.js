@@ -11,6 +11,7 @@ function Graph(){
 }
 
 Graph.prototype.placeNodes = function (){
+    const alpha = 'abcdefghijklmnopqrstuvwxyz'
     let nodePositions = [
         [ 100, 250 ],
         [ 200, 400 ],
@@ -20,7 +21,7 @@ Graph.prototype.placeNodes = function (){
         [ 800, 100 ]
       ]
     for(let i = 0; i < nodePositions.length; i++){
-        this.nodes.push(new Node(`${i}`, nodePositions[i]))
+        this.nodes.push(new Node(`${alpha[i]}`, nodePositions[i]))
     }
 }
 
