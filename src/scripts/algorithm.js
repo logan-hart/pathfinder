@@ -13,16 +13,7 @@ function Algorithm(){
 }
 
 Algorithm.prototype.begin = function(){
-    // const associations = {
-    //     a: { b: 5, c: 2 },
-    //     b: { a: 5, c: 7, d: 8, e: 5 },
-    //     c: { a: 2, b: 7, d: 4, e: 8, f: 4},
-    //     d: { b: 8, c: 4, e: 6},
-    //     e: { b: 5, c: 8, d: 6, f: 3 },
-    //     f: { e: 3, c: 4 },
-    // };
-
-    const simpleExample = {
+    const hardCodedExample = {
         a: { b: 5, c: 2 },
         b: { a: 5, c: 7, d: 8 },
         c: { a: 2, b: 7, d: 4, e: 8 },
@@ -33,13 +24,13 @@ Algorithm.prototype.begin = function(){
     
     let currentNode = 'a'
     let visitedNodes = []
-    let unvisitedNodes = Object.keys(simpleExample)
+    let unvisitedNodes = Object.keys(hardCodedExample)
     let shortestDist = {}
     this.nodes.forEach( function(node){
         shortestDist[node.name] = Infinity
     })
 
-    //update shortestDist, mark nodes as visited, updated unvisitedNodes
+    //firstnode, mark node as visited, updated unvisitedNodes
     shortestDist[currentNode] = 0    
     visitedNodes.push(this.startNode.name)
     this.startNode.status = 'visited'
@@ -47,49 +38,121 @@ Algorithm.prototype.begin = function(){
     this.graph.draw(ctx)
     
     // updates shortest distances obj
-    Object.keys(simpleExample[currentNode]).forEach(function(el){
-        if (shortestDist[el] > simpleExample[currentNode][el]){
-            shortestDist[el] = simpleExample[currentNode][el]
+    Object.keys(hardCodedExample[currentNode]).forEach(function(el){
+        if (shortestDist[el] > hardCodedExample[currentNode][el] ){
+            shortestDist[el] = hardCodedExample[currentNode][el]
         }
     })
     
-    // select the node with the shortest distance and make it nextNode
-    let nextNode = simpleExample[Object.keys(simpleExample[currentNode]).reduce((a, b) => simpleExample[currentNode][a] < simpleExample[currentNode][b] ? a : b)];
-    nextNode = Object.keys(simpleExample).filter (el => simpleExample[el] === nextNode)
+    //******* WE NOW BEGIN THE NEXT ITERATION for C
+
+    // update currentNode with closest neighboring node
+    currentNode = Object.entries(shortestDist)
+        .filter(([key]) => unvisitedNodes.includes(key))
+        .sort((a, b) => a[1] - b[1])[0][0];
     
-    
-    //change status of nextNode to visited, updated unvisitedNodes
-    visitedNodes.push(nextNode[0])
-    this.nodes.find(node => node.name === nextNode[0]).status = 'visited'
+    //change status of currentNode to visited, updated unvisitedNodes
+    visitedNodes.push(currentNode)
+    this.nodes.find(node => node.name === currentNode).status = 'visited'
     unvisitedNodes = unvisitedNodes.filter(el => el !== currentNode)
-    currentNode = nextNode
 
     setTimeout(this.graph.draw(ctx), 100) //setTimeout not functioning as intended
-    
-    //******* WE NOW BEGIN THE NEXT ITERATION
-    let distToCurrent = shortestDist[currentNode]
-
     //update shortest distances
-    Object.keys(simpleExample[currentNode]).forEach(function(el){
-        if (shortestDist[el] > simpleExample[currentNode][el]){
-            shortestDist[el] = simpleExample[currentNode][el] + distToCurrent
+    let distToCurrent = shortestDist[currentNode]
+    Object.keys(hardCodedExample[currentNode]).forEach(function(el){
+        if (shortestDist[el] > hardCodedExample[currentNode][el] + distToCurrent){
+            shortestDist[el] = hardCodedExample[currentNode][el] + distToCurrent
         }
     })
 
-    /////ABOVE THIS CODE ALL FUNCTIONS AS INTENDED
+    //******* WE NOW BEGIN THE NEXT ITERATION for B
 
-    debugger
+    currentNode = Object.entries(shortestDist)
+        .filter(([key]) => unvisitedNodes.includes(key))
+        .sort((a, b) => a[1] - b[1])[0][0];
+     
+    //change status of currentNode to visited, updated unvisitedNodes
+    visitedNodes.push(currentNode)
+    this.nodes.find(node => node.name === currentNode).status = 'visited'
+    unvisitedNodes = unvisitedNodes.filter(el => el !== currentNode)
     
-    /// PROBLEM we're returning to 'a' because it hasn't been removed from simpleExample
-        // how should i filter out the visted nodes
-    nextNode = simpleExample[Object.keys(simpleExample[currentNode]).reduce((a, b) => 
+    setTimeout(this.graph.draw(ctx), 100) //setTimeout not functioning as intended
+        
+    //update shortest distances
+    distToCurrent = shortestDist[currentNode]
+    Object.keys(hardCodedExample[currentNode]).forEach(function(el){
+        if (shortestDist[el] > hardCodedExample[currentNode][el] + distToCurrent){
+            shortestDist[el] = hardCodedExample[currentNode][el] + distToCurrent
+        }
+    })
+        
+    
+    //******* WE NOW BEGIN THE ITERATION for D
 
-            simpleExample[currentNode][a] < simpleExample[currentNode][b]  ? a : b)];
-    nextNode = Object.keys(simpleExample).filter (el => simpleExample[el] === nextNode)
-    visitedNodes.push(nextNode[0])
+    currentNode = Object.entries(shortestDist)
+    .filter(([key]) => unvisitedNodes.includes(key))
+    .sort((a, b) => a[1] - b[1])[0][0];
+    
+    //change status of currentNode to visited, updated unvisitedNodes
+    visitedNodes.push(currentNode)
+    this.nodes.find(node => node.name === currentNode).status = 'visited'
+    unvisitedNodes = unvisitedNodes.filter(el => el !== currentNode)
+    
+    setTimeout(this.graph.draw(ctx), 100) //setTimeout not functioning as intended
+    
+    //update shortest distances
+    distToCurrent = shortestDist[currentNode]
+    Object.keys(hardCodedExample[currentNode]).forEach(function(el){
+        if (shortestDist[el] > hardCodedExample[currentNode][el] + distToCurrent){
+            shortestDist[el] = hardCodedExample[currentNode][el] + distToCurrent
+        }
+    })
+    
+    //******* WE NOW BEGIN THE ITERATION for E
+
+    currentNode = Object.entries(shortestDist)
+    .filter(([key]) => unvisitedNodes.includes(key))
+    .sort((a, b) => a[1] - b[1])[0][0];
+    
+    //change status of currentNode to visited, updated unvisitedNodes
+    visitedNodes.push(currentNode)
+    this.nodes.find(node => node.name === currentNode).status = 'visited'
+    unvisitedNodes = unvisitedNodes.filter(el => el !== currentNode)
+    
+    setTimeout(this.graph.draw(ctx), 100) //setTimeout not functioning as intended
+    
+    //update shortest distances
+    distToCurrent = shortestDist[currentNode]
+    Object.keys(hardCodedExample[currentNode]).forEach(function(el){
+        if (shortestDist[el] > hardCodedExample[currentNode][el] + distToCurrent){
+            shortestDist[el] = hardCodedExample[currentNode][el] + distToCurrent
+        }
+    })
+    
+    //******* WE NOW BEGIN THE ITERATION for F
+
+    currentNode = Object.entries(shortestDist)
+    .filter(([key]) => unvisitedNodes.includes(key))
+    .sort((a, b) => a[1] - b[1])[0][0];
+    
+    //change status of currentNode to visited, updated unvisitedNodes
+    visitedNodes.push(currentNode)
+    this.nodes.find(node => node.name === currentNode).status = 'visited'
+    unvisitedNodes = unvisitedNodes.filter(el => el !== currentNode)
+    
+    setTimeout(this.graph.draw(ctx), 100) //setTimeout not functioning as intended
+    
+    //update shortest distances
+    distToCurrent = shortestDist[currentNode]
+    Object.keys(hardCodedExample[currentNode]).forEach(function(el){
+        if (shortestDist[el] > hardCodedExample[currentNode][el] + distToCurrent){
+            shortestDist[el] = hardCodedExample[currentNode][el] + distToCurrent
+        }
+    })
+    /////ABOVE THIS LINE ALL CODE IS FUNCTIONS AS INTENDED Except animation
     
     console.log("test")
-
+    
   
 }
 
