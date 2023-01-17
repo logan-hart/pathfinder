@@ -22,12 +22,8 @@ Path.prototype.draw = function(ctx, color){
 
 
 Path.prototype.associations = function (){
-    let childNode = this.childNode;
-    let parentNode = this.parentNode;
-    let weight = this.weight;
-    // debugger
-    parentNode.neighbors = Object.assign({}, childNode, {childNode: weight });
-    childNode.neighbors = Object.assign({}, parentNode, {parentNode: weight });
+    this.parentNode.neighbors[JSON.stringify(this.childNode.name)] = this.weight
+    this.childNode.neighbors[JSON.stringify(this.parentNode.name)] = this.weight
 }
 
 module.exports = Path

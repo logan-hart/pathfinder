@@ -48,8 +48,6 @@ Algorithm.prototype.determinePath = function(){
         if (path[el].length === 0){
             path[el] = [hardCodedExample[currentNode][el], currentNode]
         }
-        // if (path[el][hardCodedExample[currentNode][el]] <
-        // path[el].push[(hardCodedExample[currentNode][el]), el]
     })
     
     //******* WE NOW BEGIN THE ITERATION FOR THE REMAINING NODES
@@ -96,16 +94,18 @@ Algorithm.prototype.animate = function(ctx){
 
 
 Algorithm.prototype.buildAssociations = function(graph){
-    // let associations = {}
-    // let nodes = this.graph.nodes
-    // let neighbors = nodes.neighbors
-    // for (let i = 0; i < nodes.length; i++){   
-    //     for (let j = 0; j < nodes.neighbors.length; j++){
-    //         association.nodes[i] = Objext.assign({}, neighbors[j], {})
-    //     for (let j = 0; j < nodes.neighbors.length; j++){ // itteration over every neighbor
-    //     (associations[nodes[i][neighbors[i][0]]] = nodes.neighbors[0][j][1])}
-    // }
-    // return associations
+    let associations = {}
+    debugger
+    
+    let neighbors =this.nodes.neighbors
+    for (let i = 0; i <this.nodes.length; i++){   
+        for (let j = 0; j <this.nodes.neighbors.length; j++){
+            association.nodes[i] = Objext.assign({}, neighbors[j], {})
+        for (let j = 0; j <this.nodes.neighbors.length; j++){ // itteration over every neighbor
+            (associations[nodes[i][neighbors[i][0]]] =this.nodes.neighbors[0][j][1])}
+        }
+    }
+    return associations
 }
 
 
