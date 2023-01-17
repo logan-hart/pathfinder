@@ -9,7 +9,7 @@ function Node(name, pos){
 
 Node.prototype.draw = function(ctx, color){
     const a = 2 * Math.PI / 6;
-    const r = 10;
+    const r = 12;
     ctx.beginPath();
     for (var i = 0; i < 6; i++) {
         ctx.lineTo(this.pos[0] + r * Math.cos(a * i), this.pos[1] + r * Math.sin(a * i));

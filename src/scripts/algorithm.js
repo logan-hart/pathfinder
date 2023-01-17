@@ -13,23 +13,14 @@ function Algorithm(){
 }
 
 Algorithm.prototype.determinePathing = function(){
-    // let map = this.buildMap()
-
-    const map = {
-        a: { b: 5, c: 2 },
-        b: { a: 5, c: 7, d: 8 },
-        c: { a: 2, b: 7, d: 4, e: 8 },
-        d: { b: 8, c: 4, e: 6, f: 4 },
-        e: { c: 8, d: 6, f: 3 },
-        f: { e: 3, d: 4 },
-    };
+    let map = this.buildMap()
     
     let currentNode = this.startNode.name
     let unvisitedNodes = Object.keys(map)
     let shortestDist = {}
     let path = {}
     Object.keys(map).forEach(function(el){
-        path[el] = []
+      path[el] = []
     })
 
     this.nodes.forEach( function(node){
@@ -44,18 +35,18 @@ Algorithm.prototype.determinePathing = function(){
         currentNode = Object.entries(shortestDist)
             .filter(([key]) => unvisitedNodes.includes(key))
             .sort((a, b) => a[1] - b[1])[0][0];
-        
         this.visitedNodes.push(currentNode)
         unvisitedNodes = unvisitedNodes.filter(el => el !== currentNode)
 
         //update shortest distances
         let distToCurrent = shortestDist[currentNode]
         Object.keys(map[currentNode]).forEach(function(el){
-            if (shortestDist[el] > map[currentNode][el] + distToCurrent){
-                shortestDist[el] = map[currentNode][el] + distToCurrent
+            let ele = JSON.parse(el)
+            if (shortestDist[ele] > map[currentNode][el] + distToCurrent){
+                shortestDist[ele] = map[currentNode][el] + distToCurrent
             }
-            if (path[el].length === 0){
-                path[el] = [(map[currentNode][el] + distToCurrent), currentNode]
+            if (path[ele].length === 0){
+                path[ele] = [(map[currentNode][el] + distToCurrent), currentNode]
             }
         })
     }
@@ -84,31 +75,89 @@ Algorithm.prototype.shortestPath = function(){
     return (shortest.concat(this.startNode.name)).reverse()
 }
 
+// Algorithm.prototype.animateNodes = function(ctx){
+//   let that = this
+//     setInterval(_animateNodes, this.graph.delay)
+
+//     function _animateNodes(){    
+//         if (that.visitedNodes.length > 0){
+//             let first = that.visitedNodes.shift()
+//             that.nodes.find(node => node.name === first).status = 'visited'
+//             that.graph.draw(ctx)
+//         }
+//     }
+// }
+
+// Algorithm.prototype.animatePath = async function(ctx){
+//     setInterval(_animatePath, this.graph.delay)
+
+//     let that = this
+//     function _animatePath(){
+//         let shortest = that.shortestPath()
+//         for (let i = 0; i < shortest.length -1; i++){
+//             current = that.paths.find(path => path.parentNode.name === shortest[i] && path.childNode.name === shortest[i+1])
+//             current.status = 'shortest'
+//             that.graph.draw(ctx)
+//         }
+//     }
+
+// }
+
 Algorithm.prototype.animateNodes = function(ctx){
-  let that = this
-    setInterval(_animateNodes, this.graph.delay)
-
-    function _animateNodes(){    
-        if (that.visitedNodes.length > 0){
-            let first = that.visitedNodes.shift()
-            that.nodes.find(node => node.name === first).status = 'visited'
-            that.graph.draw(ctx)
-        }
-    }
-}
-
-Algorithm.prototype.animatePath = function(ctx){
-    setInterval(_animatePath, this.graph.delay)
-
     let that = this
-    function _animatePath(){
-        let shortest = that.shortestPath()
-        for (let i = 0; i < shortest.length -1; i++){
-            current = that.paths.find(path => path.parentNode.name === shortest[i] && path.childNode.name === shortest[i+1])
-            current.status = 'shortest'
-            that.graph.draw(ctx)
-        }
-    }
-}
+    return new Promise((resolve) => {
+      setInterval(_animateNodes, this.graph.delay)
+  
+      function _animateNodes(){    
+          if (that.visitedNodes.length > 0){
+              let first = that.visitedNodes.shift()
+              that.nodes.find(node => node.name === first).status = 'visited'
+              that.graph.draw(ctx)
+          } else {
+              resolve()
+          }
+      }
+    })
+  }
+  
+  Algorithm.prototype.animatePath = async function(ctx){
+      await this.animateNodes(ctx)
+
+  
+      let that = this
+          let shortest = that.shortestPath()
+          for (let i = 0; i < shortest.length -1; i++){
+              current = that.paths.find(path => path.parentNode.name === shortest[i] && path.childNode.name === shortest[i+1])
+              current.status = 'shortest'
+              that.graph.draw(ctx)
+          }
+      
+  }
+
+// function drawLine(x1,y1,x2,y2,ctx,ratio) {
+//     ctx.fillRect(0,0,970,600);
+//     ctx.moveTo(x1,y1);
+//     x2 = x1 + ratio * (x2-x1);
+//     y2 = y1 + ratio * (y2-y1);
+//     ctx.lineTo(x2,y2);
+//     ctx.stroke();
+//   }
+  
+//   function animate(ratio) {
+//     ratio = ratio || 0;
+//     drawLine(0,0,300,300,ratio);
+//     if(ratio<1) {
+//       requestAnimationFrame(function() {
+//         animate(ratio + 0.01);
+//       });
+//     }
+//   }
+  
+
+
+  
+
+//     this.pos[0] += this.vel[0]
+// this.pos[1] += this.vel[1]
 
 module.exports = Algorithm;
