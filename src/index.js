@@ -20,9 +20,9 @@ document.addEventListener("DOMContentLoaded", function () {
     algo.determinePath()
 
 
-    function selectStart(){
+    // function selectStart(){
 
-    }
+    // }
 
 })
 

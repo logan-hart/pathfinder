@@ -20,7 +20,6 @@ Path.prototype.draw = function(ctx, color){
     ctx.stroke();
 }
 
-
 Path.prototype.associations = function (){
     this.parentNode.neighbors[JSON.stringify(this.childNode.name)] = this.weight
     this.childNode.neighbors[JSON.stringify(this.parentNode.name)] = this.weight

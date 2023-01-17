@@ -13,20 +13,22 @@ function Algorithm(){
 }
 
 Algorithm.prototype.determinePath = function(){
-    const hardCodedExample = {
-        a: { b: 5, c: 2 },
-        b: { a: 5, c: 7, d: 8 },
-        c: { a: 2, b: 7, d: 4, e: 8 },
-        d: { b: 8, c: 4, e: 6, f: 4 },
-        e: { c: 8, d: 6, f: 3 },
-        f: { e: 3, d: 4 },
-      };
+    let map = this.buildMap()
+
+    // const map = {
+    //     a: { b: 5, c: 2 },
+    //     b: { a: 5, c: 7, d: 8 },
+    //     c: { a: 2, b: 7, d: 4, e: 8 },
+    //     d: { b: 8, c: 4, e: 6, f: 4 },
+    //     e: { c: 8, d: 6, f: 3 },
+    //     f: { e: 3, d: 4 },
+    //   };
     
     let currentNode = this.startNode.name
-    let unvisitedNodes = Object.keys(hardCodedExample)
+    let unvisitedNodes = Object.keys(map)
     let shortestDist = {}
     let path = {}
-    Object.keys(hardCodedExample).forEach(function(el){
+    Object.keys(map).forEach(function(el){
         path[el] = []
     })
 
@@ -41,12 +43,12 @@ Algorithm.prototype.determinePath = function(){
     unvisitedNodes = unvisitedNodes.filter(el => el !== currentNode)
     
     // updates shortest distances obj
-    Object.keys(hardCodedExample[currentNode]).forEach(function(el){
-        if (shortestDist[el] > hardCodedExample[currentNode][el] ){
-            shortestDist[el] = hardCodedExample[currentNode][el]
+    Object.keys(map[currentNode]).forEach(function(el){
+        if (shortestDist[el] > map[currentNode][el] ){
+            shortestDist[el] = map[currentNode][el]
         }
-        if (path[el].length === 0){
-            path[el] = [hardCodedExample[currentNode][el], currentNode]
+        if (path[JSON.parse(el)].length === 0){
+            path[JSON.parse(el)] = [map[currentNode][JSON.parse(el)], currentNode]
         }
     })
     
@@ -64,12 +66,12 @@ Algorithm.prototype.determinePath = function(){
 
         //update shortest distances
         let distToCurrent = shortestDist[currentNode]
-        Object.keys(hardCodedExample[currentNode]).forEach(function(el){
-            if (shortestDist[el] > hardCodedExample[currentNode][el] + distToCurrent){
-                shortestDist[el] = hardCodedExample[currentNode][el] + distToCurrent
+        Object.keys(map[currentNode]).forEach(function(el){
+            if (shortestDist[el] > map[currentNode][el] + distToCurrent){
+                shortestDist[el] = map[currentNode][el] + distToCurrent
             }
-            if (path[el].length === 0){
-                path[el] = [(hardCodedExample[currentNode][el] + distToCurrent), currentNode]
+            if (path[JSON.parse(el)].length === 0){
+                path[JSON.parse(el)] = [(map[currentNode][JSON.parse(el)] + distToCurrent), currentNode]
             }
         })
     }
@@ -85,27 +87,21 @@ Algorithm.prototype.animate = function(ctx){
     function animateNodes(){    
         if (that.visitedNodes.length > 0){
             let first = that.visitedNodes.shift()
-
             that.nodes.find(node => node.name === first).status = 'visited'
             that.graph.draw(ctx)
         }
     }
 }
 
-
-Algorithm.prototype.buildAssociations = function(graph){
-    let associations = {}
-    debugger
+Algorithm.prototype.buildMap = function(){
+    let map = {}
     
-    let neighbors =this.nodes.neighbors
     for (let i = 0; i <this.nodes.length; i++){   
-        for (let j = 0; j <this.nodes.neighbors.length; j++){
-            association.nodes[i] = Objext.assign({}, neighbors[j], {})
-        for (let j = 0; j <this.nodes.neighbors.length; j++){ // itteration over every neighbor
-            (associations[nodes[i][neighbors[i][0]]] =this.nodes.neighbors[0][j][1])}
+        if (!map[this.nodes[i].name]){
+            map[this.nodes[i].name] = this.nodes[i].neighbors
         }
     }
-    return associations
+    return map
 }
 
 

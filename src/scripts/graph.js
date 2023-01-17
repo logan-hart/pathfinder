@@ -22,7 +22,7 @@ Graph.prototype.placeNodes = function (){
         [ 800, 100 ]
       ]
     for(let i = 0; i < nodePositions.length; i++){
-        this.nodes.push(new Node(`${alpha[i]}`, nodePositions[i]))
+        this.nodes.push(new Node(alpha[i], nodePositions[i]))
     }
 }
 

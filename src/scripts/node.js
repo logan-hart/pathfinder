@@ -17,12 +17,6 @@ Node.prototype.draw = function(ctx, color){
     ctx.fill();
 }
 
-function nodeExp(){
-    console.log("success")
-}
-
-
-
 // Node.prototype.move = function (pos){
 //     this.position = (pos)
 //     this.draw
