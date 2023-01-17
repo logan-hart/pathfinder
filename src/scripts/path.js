@@ -6,8 +6,9 @@ function Path (parentNode, childNode, ){
     this.startPos = parentNode.pos
     this.endPos = childNode.pos
     this.distance = Math.sqrt(Math.pow((this.startPos[0] - this. endPos[0]),2) + Math.pow((this. startPos[1] + this.endPos[1]),2))
-    this.status = 'unvisited'
+    this.traffic = 0
     this.weight = this.distance // * some factor
+    this.status = 'none'
     this.associations()
 }
 

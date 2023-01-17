@@ -1,7 +1,87 @@
-/* REMEMBER to add CSS RESET!!!!!!*/
+/* 
+    http://meyerweb.com/eric/tools/css/reset/ 
+    v2.0 | 20110126
+    License: none (public domain)
+*/
 
-#canvas {                                   
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* CODE ABOVE IS CSS RESET*/
+
+body {
+    background-image: url(https://img.freepik.com/free-vector/white-clean-hexagonal-medical-concept_1017-29801.jpg?w=2000);
+    background-size: 90%;
+    /* transform: rotate(180deg); */
+}
+   
+h1 {
+    background: transparent;
+    text-align: center;
+    font-size:10vw;
+    font-family: Courier New;
+    color: rgb(90, 89, 89);
+    text-shadow: 3px 3px 10px rgb(69, 70, 70);
+}
+
+#canvas {    
+    padding: 0;
+    margin: auto;
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;          
     border-style: solid;
     border-width: 1px;
+    border-color: black;
     box-shadow: 25px 25px 30px darkgrey;
+}
+
+
+#startbutton {
+    font-size: larger;
+    font-family: Courier New;
 }

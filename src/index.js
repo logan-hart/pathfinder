@@ -13,11 +13,21 @@ document.addEventListener("DOMContentLoaded", function () {
   
       window.ctx = ctx;
   
-    ctx.fillStyle = "white";
+    ctx.fillStyle = "#F5FCFF";
     ctx.fillRect(0, 0, 970, 600);
- 
-    algo = new Algorithm
-    algo.determinePath()
+    
+       algo = new Algorithm
+       algo.determinePathing()
+
+    const button = document.getElementById('startbutton')
+
+    button.addEventListener('click', e => {
+      e.preventDefault()
+      algo.animateNodes(ctx)
+    })
+
+    
+
 
 
     // function selectStart(){

@@ -12,7 +12,7 @@ function Graph(){
 }
 
 Graph.prototype.placeNodes = function (){
-    const alpha = 'abcdefghijklmnopqrstuvwxyz'
+    const alpha = 'abcdefghijklmnopqrstuvwxyz'.split('')
     let nodePositions = [
         [ 100, 250 ],
         [ 200, 400 ],
@@ -33,11 +33,10 @@ Graph.prototype.placePaths = function (){
         [this.nodes[0], this.nodes[2]],
         [this.nodes[1], this.nodes[2]],
         [this.nodes[1], this.nodes[3]],
-        [this.nodes[1], this.nodes[4]],
         [this.nodes[2], this.nodes[3]],
         [this.nodes[2], this.nodes[4]],
-        [this.nodes[2], this.nodes[5]],
         [this.nodes[3], this.nodes[4]],
+        [this.nodes[3], this.nodes[5]],
         [this.nodes[4], this.nodes[5]]
     ]
     let that = this
@@ -48,30 +47,22 @@ Graph.prototype.placePaths = function (){
 
 Graph.prototype.draw = function(ctx){
     ctx.clearRect(0, 0, 970, 600)
-    ctx.fillStyle = "white";
+    ctx.fillStyle = "#fbfbfb";
     ctx.fillRect(0, 0, 970, 600);
     this.paths.forEach(function (path){
-        if (path.status !== 'visited'){
+        if (path.status !== 'shortest'){
             path.draw(ctx, 'black')
         } else {
-            path.draw(ctx, 'green')
+            path.draw(ctx, '#0288d1')
         }
     })
     this.nodes.forEach(function(node){
         if (node.status !== 'visited'){
             node.draw(ctx, 'white')
         } else {
-            node.draw(ctx, 'green')
+            node.draw(ctx, '#0288d1')
         }
     })
-}
-
-Graph.prototype.buildAssociations = function (){
-    // let associations = {}
-    // for (let i = 0; i < this.nodes.length; i++){
-    //     if (!associations[i]) associations[i] = {}
-    // }
-    // console.log(associations)
 }
 
 
