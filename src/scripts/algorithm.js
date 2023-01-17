@@ -5,14 +5,14 @@ const Graph = require("./graph.js");
 function Algorithm(){
     this.graph = new Graph
     this.nodes = this.graph.nodes
-    this.startNode = this.graph.nodes[0]
-    this.endNode = 'd'   //this.graph.nodes[this.graph.nodes.length-1] 
-
-   
+    this.paths = this.graph.paths
+    this.startNode = this.nodes[0]
+    this.endNode = this.nodes[this.nodes.length-1] //this.graph.nodes[this.graph.nodes.length-1] 
+    this.visitedNodes = []
     // this.associations = buildAssociations(this.graph)
 }
 
-Algorithm.prototype.begin = function(){
+Algorithm.prototype.determinePath = function(){
     const hardCodedExample = {
         a: { b: 5, c: 2 },
         b: { a: 5, c: 7, d: 8 },
@@ -22,140 +22,77 @@ Algorithm.prototype.begin = function(){
         f: { e: 3, d: 4 },
       };
     
-    let currentNode = 'a'
-    let visitedNodes = []
+    let currentNode = this.startNode.name
     let unvisitedNodes = Object.keys(hardCodedExample)
     let shortestDist = {}
+    let path = {}
+    Object.keys(hardCodedExample).forEach(function(el){
+        path[el] = []
+    })
+
     this.nodes.forEach( function(node){
         shortestDist[node.name] = Infinity
     })
 
-    //firstnode, mark node as visited, updated unvisitedNodes
     shortestDist[currentNode] = 0    
-    visitedNodes.push(this.startNode.name)
-    this.startNode.status = 'visited'
+    path[currentNode] = [0, currentNode]
+    this.visitedNodes.push(currentNode)
+
     unvisitedNodes = unvisitedNodes.filter(el => el !== currentNode)
-    this.graph.draw(ctx)
     
     // updates shortest distances obj
     Object.keys(hardCodedExample[currentNode]).forEach(function(el){
         if (shortestDist[el] > hardCodedExample[currentNode][el] ){
             shortestDist[el] = hardCodedExample[currentNode][el]
         }
-    })
-    
-    //******* WE NOW BEGIN THE NEXT ITERATION for C
-
-    // update currentNode with closest neighboring node
-    currentNode = Object.entries(shortestDist)
-        .filter(([key]) => unvisitedNodes.includes(key))
-        .sort((a, b) => a[1] - b[1])[0][0];
-    
-    //change status of currentNode to visited, updated unvisitedNodes
-    visitedNodes.push(currentNode)
-    this.nodes.find(node => node.name === currentNode).status = 'visited'
-    unvisitedNodes = unvisitedNodes.filter(el => el !== currentNode)
-
-    setTimeout(this.graph.draw(ctx), 100) //setTimeout not functioning as intended
-    //update shortest distances
-    let distToCurrent = shortestDist[currentNode]
-    Object.keys(hardCodedExample[currentNode]).forEach(function(el){
-        if (shortestDist[el] > hardCodedExample[currentNode][el] + distToCurrent){
-            shortestDist[el] = hardCodedExample[currentNode][el] + distToCurrent
+        if (path[el].length === 0){
+            path[el] = [hardCodedExample[currentNode][el], currentNode]
         }
+        // if (path[el][hardCodedExample[currentNode][el]] <
+        // path[el].push[(hardCodedExample[currentNode][el]), el]
     })
-
-    //******* WE NOW BEGIN THE NEXT ITERATION for B
-
-    currentNode = Object.entries(shortestDist)
-        .filter(([key]) => unvisitedNodes.includes(key))
-        .sort((a, b) => a[1] - b[1])[0][0];
-     
-    //change status of currentNode to visited, updated unvisitedNodes
-    visitedNodes.push(currentNode)
-    this.nodes.find(node => node.name === currentNode).status = 'visited'
-    unvisitedNodes = unvisitedNodes.filter(el => el !== currentNode)
     
-    setTimeout(this.graph.draw(ctx), 100) //setTimeout not functioning as intended
+    //******* WE NOW BEGIN THE ITERATION FOR THE REMAINING NODES
+
+    while (unvisitedNodes.length > 0){
+
+        // update currentNode with closest neighboring node
+        currentNode = Object.entries(shortestDist)
+            .filter(([key]) => unvisitedNodes.includes(key))
+            .sort((a, b) => a[1] - b[1])[0][0];
         
-    //update shortest distances
-    distToCurrent = shortestDist[currentNode]
-    Object.keys(hardCodedExample[currentNode]).forEach(function(el){
-        if (shortestDist[el] > hardCodedExample[currentNode][el] + distToCurrent){
-            shortestDist[el] = hardCodedExample[currentNode][el] + distToCurrent
-        }
-    })
-        
-    
-    //******* WE NOW BEGIN THE ITERATION for D
+        this.visitedNodes.push(currentNode)
+        unvisitedNodes = unvisitedNodes.filter(el => el !== currentNode)
 
-    currentNode = Object.entries(shortestDist)
-    .filter(([key]) => unvisitedNodes.includes(key))
-    .sort((a, b) => a[1] - b[1])[0][0];
-    
-    //change status of currentNode to visited, updated unvisitedNodes
-    visitedNodes.push(currentNode)
-    this.nodes.find(node => node.name === currentNode).status = 'visited'
-    unvisitedNodes = unvisitedNodes.filter(el => el !== currentNode)
-    
-    setTimeout(this.graph.draw(ctx), 100) //setTimeout not functioning as intended
-    
-    //update shortest distances
-    distToCurrent = shortestDist[currentNode]
-    Object.keys(hardCodedExample[currentNode]).forEach(function(el){
-        if (shortestDist[el] > hardCodedExample[currentNode][el] + distToCurrent){
-            shortestDist[el] = hardCodedExample[currentNode][el] + distToCurrent
-        }
-    })
-    
-    //******* WE NOW BEGIN THE ITERATION for E
-
-    currentNode = Object.entries(shortestDist)
-    .filter(([key]) => unvisitedNodes.includes(key))
-    .sort((a, b) => a[1] - b[1])[0][0];
-    
-    //change status of currentNode to visited, updated unvisitedNodes
-    visitedNodes.push(currentNode)
-    this.nodes.find(node => node.name === currentNode).status = 'visited'
-    unvisitedNodes = unvisitedNodes.filter(el => el !== currentNode)
-    
-    setTimeout(this.graph.draw(ctx), 100) //setTimeout not functioning as intended
-    
-    //update shortest distances
-    distToCurrent = shortestDist[currentNode]
-    Object.keys(hardCodedExample[currentNode]).forEach(function(el){
-        if (shortestDist[el] > hardCodedExample[currentNode][el] + distToCurrent){
-            shortestDist[el] = hardCodedExample[currentNode][el] + distToCurrent
-        }
-    })
-    
-    //******* WE NOW BEGIN THE ITERATION for F
-
-    currentNode = Object.entries(shortestDist)
-    .filter(([key]) => unvisitedNodes.includes(key))
-    .sort((a, b) => a[1] - b[1])[0][0];
-    
-    //change status of currentNode to visited, updated unvisitedNodes
-    visitedNodes.push(currentNode)
-    this.nodes.find(node => node.name === currentNode).status = 'visited'
-    unvisitedNodes = unvisitedNodes.filter(el => el !== currentNode)
-    
-    setTimeout(this.graph.draw(ctx), 100) //setTimeout not functioning as intended
-    
-    //update shortest distances
-    distToCurrent = shortestDist[currentNode]
-    Object.keys(hardCodedExample[currentNode]).forEach(function(el){
-        if (shortestDist[el] > hardCodedExample[currentNode][el] + distToCurrent){
-            shortestDist[el] = hardCodedExample[currentNode][el] + distToCurrent
-        }
-    })
-    /////ABOVE THIS LINE ALL CODE IS FUNCTIONS AS INTENDED Except animation
-    
-    console.log("test")
-    
-  
+        //update shortest distances
+        let distToCurrent = shortestDist[currentNode]
+        Object.keys(hardCodedExample[currentNode]).forEach(function(el){
+            if (shortestDist[el] > hardCodedExample[currentNode][el] + distToCurrent){
+                shortestDist[el] = hardCodedExample[currentNode][el] + distToCurrent
+            }
+            if (path[el].length === 0){
+                path[el] = [(hardCodedExample[currentNode][el] + distToCurrent), currentNode]
+            }
+        })
+    }
+    this.path = path
+    //can refactor to combine path & shortestDist OR remove shortest Dist
 }
 
+
+Algorithm.prototype.animate = function(ctx){
+  let that = this
+    setInterval(animateNodes, this.graph.delay)
+
+    function animateNodes(){    
+        if (that.visitedNodes.length > 0){
+            let first = that.visitedNodes.shift()
+
+            that.nodes.find(node => node.name === first).status = 'visited'
+            that.graph.draw(ctx)
+        }
+    }
+}
 
 
 Algorithm.prototype.buildAssociations = function(graph){

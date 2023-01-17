@@ -16,8 +16,8 @@ document.addEventListener("DOMContentLoaded", function () {
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, 970, 600);
  
-    ani = new Algorithm
-    ani.begin()
+    algo = new Algorithm
+    algo.determinePath()
 
 
     function selectStart(){

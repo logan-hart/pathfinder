@@ -5,6 +5,7 @@ function Graph(){
     // this.numNodes = numNodes
     this.nodes = []
     this.paths = []
+    this.delay = 1000
     this.placeNodes()
     this.placePaths()
     this.draw(ctx)
