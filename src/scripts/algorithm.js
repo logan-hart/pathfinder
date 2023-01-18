@@ -3,7 +3,15 @@ function Algorithm(){
     this.nodes = this.graph.nodes
     this.paths = this.graph.paths
     this.startNode = this.nodes.find(node => node.selected === 'start')
+    if (!this.startNode) {
+        this.startNode = this.nodes[0]
+        this.nodes[0].selected = 'start'
+    }
     this.endNode = this.nodes.find(node => node.selected === 'end')
+    if (!this.endNode) {
+        this.endNode = this.nodes[this.nodes.length-1]
+        this.nodes[this.nodes.length-1].selected = 'end'
+    }
     this.visitedNodes = []
 }
 
@@ -60,13 +68,19 @@ Algorithm.prototype.buildMap = function(){
 }
 
 Algorithm.prototype.shortestPath = function(){
+    const alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
     let currentNode = this.endNode.name
     let shortest = []
     while (currentNode !== this.startNode.name){
         shortest.push(currentNode)
         currentNode = this.path[currentNode][1]
     }
-    return (shortest.concat(this.startNode.name)).reverse()   
+
+    if (alpha.indexOf(this.startNode.name) > alpha.indexOf(this.endNode.name)){
+        return shortest.concat(this.startNode.name)
+    } else {
+        return (shortest.concat(this.startNode.name)).reverse()   
+    }
 }
 
 

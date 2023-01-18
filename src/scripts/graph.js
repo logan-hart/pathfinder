@@ -10,14 +10,14 @@ function Graph(){
 }
 
 Graph.prototype.placeNodes = function (){
-    const alpha = 'abcdefghijklmnopqrstuvwxyz'.split('')
+    const alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
     let nodePositions = [
-        [ 100, 250 ],
+        [ 100, 175 ],
         [ 200, 400 ],
         [ 400, 75 ],
         [ 550, 475 ],
-        [ 750, 325 ],
-        [ 800, 100 ]
+        [ 750, 100 ],
+        [ 850, 400 ]
       ]
     for(let i = 0; i < nodePositions.length; i++){
         this.nodes.push(new Node(alpha[i], nodePositions[i]))

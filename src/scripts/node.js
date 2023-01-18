@@ -15,7 +15,6 @@ Node.prototype.draw = function(ctx){
     for (var i = 0; i < 6; i++) {
         ctx.lineTo(this.pos[0] + r * Math.cos(a * i), this.pos[1] + r * Math.sin(a * i));
     }
-    
     if (this.selected === null){
         ctx.strokeStyle = "black";
         ctx.lineWidth = 3;

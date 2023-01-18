@@ -18,8 +18,6 @@ document.addEventListener("DOMContentLoaded", function () {
   ctx.font = "20px Courier New"
 
   g = new Graph
-  g.nodes[0].selected = "start"
-  g.nodes[g.nodes.length-1].selected = "end"
   g.draw(ctx)
   
   const startButton = document.getElementById('startbutton')
@@ -31,6 +29,10 @@ document.addEventListener("DOMContentLoaded", function () {
     algo.determinePathing()
     algo.animateNodes(ctx)
     algo.animatePath(ctx)
+    startButton.disabled = true;
+      setTimeout(function(){startButton.disabled = false;}, g.delay *8)
+    resetButton.disabled = true;
+      setTimeout(function(){resetButton.disabled = false;}, g.delay *8)
   })
   
   resetButton.addEventListener('click', e => {
@@ -57,11 +59,11 @@ document.addEventListener("DOMContentLoaded", function () {
     Object.keys(g.nodeHitBoxes).forEach (function (el){
       let hitbox = g.nodeHitBoxes[el]
       if (pos[0] > hitbox[2] && pos[0] < hitbox[3] && pos[1] > hitbox[0] && pos[1] < hitbox[1]){
-        let found = g.nodes.find(node => node.name === el) // ='a'
+        let found = g.nodes.find(node => node.name === el)
         let result = selectedSpaceship()
         if (result === -1){
           found.selected = 'start'
-        } else if (result === 0){
+        } else if (result === 0 && found.selected !== 'start'){
           found.selected = 'end'
         } else{
           g.clearSelected()
@@ -84,6 +86,13 @@ document.addEventListener("DOMContentLoaded", function () {
     })
     return start === 0 && end === 0 ? -1: start === 1 && end === 0 ? 0 : 1 
   }
+
+  var slider = document.getElementById("myRange")
+  slider.oninput = function() {
+    g.delay = 1000 - this.value 
+  }
+
+
 })
 
 
