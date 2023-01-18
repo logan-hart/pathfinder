@@ -19,15 +19,25 @@ document.addEventListener("DOMContentLoaded", function () {
       algo = new Algorithm
       algo.determinePathing()
 
-  const button = document.getElementById('startbutton')
+  const startbutton = document.getElementById('startbutton')
+  const resetbutton = document.getElementById('resetbutton')
 
-  button.addEventListener('click', e => {
+  startbutton.addEventListener('click', e => {
     e.preventDefault()
     algo.animateNodes(ctx)
     algo.animatePath(ctx)
   })
 
+  resetbutton.addEventListener('click', e => {
+    algo.nodes.forEach (function(el){
+      el.status = "unvisited"
+    })
+    algo.paths.forEach(function(el){
+      el.status = "none"
+    })
+    algo.graph.draw(ctx)
 
+  })
 
   // canvas.addEventListener('click', (event) => {
   //   const isPointInPath = ctx.isPointInPath(node, event.offsetX, event.offsetY)

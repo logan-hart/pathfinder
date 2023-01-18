@@ -75,42 +75,16 @@ Algorithm.prototype.shortestPath = function(){
     return (shortest.concat(this.startNode.name)).reverse()
 }
 
-// Algorithm.prototype.animateNodes = function(ctx){
-//   let that = this
-//     setInterval(_animateNodes, this.graph.delay)
-
-//     function _animateNodes(){    
-//         if (that.visitedNodes.length > 0){
-//             let first = that.visitedNodes.shift()
-//             that.nodes.find(node => node.name === first).status = 'visited'
-//             that.graph.draw(ctx)
-//         }
-//     }
-// }
-
-// Algorithm.prototype.animatePath = async function(ctx){
-//     setInterval(_animatePath, this.graph.delay)
-
-//     let that = this
-//     function _animatePath(){
-//         let shortest = that.shortestPath()
-//         for (let i = 0; i < shortest.length -1; i++){
-//             current = that.paths.find(path => path.parentNode.name === shortest[i] && path.childNode.name === shortest[i+1])
-//             current.status = 'shortest'
-//             that.graph.draw(ctx)
-//         }
-//     }
-
-// }
 
 Algorithm.prototype.animateNodes = function(ctx){
+    let visitedNodes = this.visitedNodes.slice(0)
     let that = this
     return new Promise((resolve) => {
       setInterval(_animateNodes, this.graph.delay)
   
       function _animateNodes(){    
-          if (that.visitedNodes.length > 0){
-              let first = that.visitedNodes.shift()
+          if (visitedNodes.length > 0){
+              let first = visitedNodes.shift()
               that.nodes.find(node => node.name === first).status = 'visited'
               that.graph.draw(ctx)
           } else {

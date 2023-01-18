@@ -5,7 +5,7 @@ function Graph(){
     // this.numNodes = numNodes
     this.nodes = []
     this.paths = []
-    this.delay = 1000
+    this.delay = 500
     this.placeNodes()
     this.placePaths()
     this.draw(ctx)
@@ -51,9 +51,9 @@ Graph.prototype.draw = function(ctx){
     ctx.fillRect(0, 0, 970, 600);
     this.paths.forEach(function (path){
         if (path.status !== 'shortest'){
-            path.draw(ctx, 'black')
+            path.draw(ctx, 'black', 1)
         } else {
-            path.draw(ctx, '#0288d1')
+            path.draw(ctx, '#0288d1', 8)
         }
     })
     this.nodes.forEach(function(node){

@@ -13,10 +13,10 @@ function Path (parentNode, childNode, ){
     this.associations()
 }
 
-Path.prototype.draw = function(ctx, color){
+Path.prototype.draw = function(ctx, color, size){
     ctx.beginPath();
     ctx.strokeStyle = `${color}`;
-    ctx.lineWidth = 1;
+    ctx.lineWidth = size;
     ctx.moveTo(this.startPos[0], this.startPos[1]);
     ctx.lineTo(this.endPos[0], this.endPos[1]);
     ctx.stroke();

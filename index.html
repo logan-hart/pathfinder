@@ -7,18 +7,24 @@
     <link rel="stylesheet" href="./dist/main.css" />
     <script src="./dist/main.js" defer></script>
     <title>Pathfinder</title>
-    <link rel="icon" type="image/x-icon" href="./images/favicon.png">
+    <link rel="icon" type="image/x-icon" href="./images/flavicon.png">
   </head>
   
 
   <body>
-    <h1>Path Optimizer<h2>
+    <h1>Path Optimizer</h1>
     <canvas id="canvas"></canvas>
     <div id="instructions"></div>
-    <button type="button" id="startbutton">Start Animation</button>
+    <button type="button" id="startbutton" class="button">- Animate -</button>
+    <button type="button" id="resetbutton" class ="button">- Reset -</button>
+    <div class="slidecontainer">
+      <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+    </div>
     <div id="links">
-      <!-- <img src="./images/linkedin2.png">
-      <img src="./images/github.png"> -->
+      <button><img src="./images/info.png" id="info"></button>
+      <div class="active" id="overlay"></div>
+      <div><a href="https://github.com/logan-hart"></a><img src="./images/github.png" id="github"></div>
+      <img src="./images/linkedin.png" id="linkedin">
     </div>
   </body>
 
