@@ -1,11 +1,9 @@
-const Node = require("./node.js");
-const Path = require("./path.js");
-
 function Graph(){
-    // this.numNodes = numNodes
     this.nodes = []
     this.paths = []
     this.delay = 500
+    // this.numNodes = numNodes
+    this.nodeHitBoxes = {}
     this.placeNodes()
     this.placePaths()
     this.draw(ctx)
@@ -24,20 +22,25 @@ Graph.prototype.placeNodes = function (){
     for(let i = 0; i < nodePositions.length; i++){
         this.nodes.push(new Node(alpha[i], nodePositions[i]))
     }
+
+    // functionality here for adding node boxes to array?   
+    for(let i = 0; i < nodePositions.length; i++){
+        this.nodeHitBoxes[alpha[i]] = [nodePositions[i][1] - 13, nodePositions[i][1] +13, nodePositions[i][0] -13, nodePositions[i][0] +13]
+    }
 }
 
 Graph.prototype.placePaths = function (){
     console.log(this)
     let nodePaths =[
-        [this.nodes[0], this.nodes[1]],
-        [this.nodes[0], this.nodes[2]],
-        [this.nodes[1], this.nodes[2]],
-        [this.nodes[1], this.nodes[3]],
-        [this.nodes[2], this.nodes[3]],
-        [this.nodes[2], this.nodes[4]],
-        [this.nodes[3], this.nodes[4]],
-        [this.nodes[3], this.nodes[5]],
-        [this.nodes[4], this.nodes[5]]
+        [this.nodes[0], this.nodes[1], 'none'],
+        [this.nodes[0], this.nodes[2], 'none'],
+        [this.nodes[1], this.nodes[2], 'none'],
+        [this.nodes[1], this.nodes[3], 'none'],
+        [this.nodes[2], this.nodes[3], 'none'],
+        [this.nodes[2], this.nodes[4], 'none'],
+        [this.nodes[3], this.nodes[4], 'none'],
+        [this.nodes[3], this.nodes[5], 'none'],
+        [this.nodes[4], this.nodes[5], 'none']
     ]
     let that = this
     nodePaths.forEach( function(nodePair){
@@ -45,25 +48,27 @@ Graph.prototype.placePaths = function (){
     })
 }
 
+Graph.prototype.annotate = function(ctx){
+    // this.paths.
+}
+
 Graph.prototype.draw = function(ctx){
     ctx.clearRect(0, 0, 970, 600)
     ctx.fillStyle = "#fbfbfb";
     ctx.fillRect(0, 0, 970, 600);
     this.paths.forEach(function (path){
-        if (path.status !== 'shortest'){
-            path.draw(ctx, 'black', 1)
-        } else {
-            path.draw(ctx, '#0288d1', 8)
-        }
+        path.draw(ctx)
     })
     this.nodes.forEach(function(node){
-        if (node.status !== 'visited'){
-            node.draw(ctx, 'white')
-        } else {
-            node.draw(ctx, '#0288d1')
-        }
+        node.draw(ctx)
     })
 }
+
+Graph.prototype.clearSelected = function(){
+    Object.keys(g.nodes).forEach (function(element){
+      g.nodes[element].selected = null
+    })
+  }
 
 
 // Graph.prototype.getRandomPositions = function(){

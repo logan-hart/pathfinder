@@ -53,6 +53,9 @@ table {
 
 /* CODE ABOVE IS CSS RESET*/
 
+
+
+
 body {
     background-image: url(https://img.freepik.com/free-vector/white-clean-hexagonal-medical-concept_1017-29801.jpg?w=2000);
     background-size: cover;
@@ -73,39 +76,39 @@ h1 {
     margin: auto;
     display: block;
     position: absolute;
-    top: 0;
+    top: 50;
     bottom: 0;
     left: 0;
     right: 0;          
     border-style: solid;
     border-width: 1px;
-    border-radius: 10px;
+    border-radius: 7px;
     border-color: black;
     box-shadow: 25px 25px 30px darkgrey;
 }
-
 
 .button {
     font-size: larger;
     font-family: Courier New;
     border: none;
     background-color: lightblue;
-
+    border-radius: 7px;
 }
 
-
-#links {
+#links button{
     display: flex;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
 }
 
 #links img{
+    align-items: flex-end;
     float: left;
-    width:  100px;
-    height: 100px;
+    width:  80px;
+    height: 80px;
     object-fit: cover;
-
 }
-
 /*!*************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss ***!
   \*************************************************************************************************************************************/

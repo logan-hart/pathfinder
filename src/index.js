@@ -15,41 +15,83 @@ document.addEventListener("DOMContentLoaded", function () {
 
   ctx.fillStyle = "#F5FCFF";
   ctx.fillRect(0, 0, 970, 600);
+  ctx.font = "20px Courier New"
 
-      algo = new Algorithm
-      algo.determinePathing()
-
-  const startbutton = document.getElementById('startbutton')
-  const resetbutton = document.getElementById('resetbutton')
-
-  startbutton.addEventListener('click', e => {
+  g = new Graph
+  g.nodes[0].selected = "start"
+  g.nodes[g.nodes.length-1].selected = "end"
+  g.draw(ctx)
+  
+  const startButton = document.getElementById('startbutton')
+  const resetButton = document.getElementById('resetbutton')
+  
+  startButton.addEventListener('click', e => {
     e.preventDefault()
+    algo = new Algorithm
+    algo.determinePathing()
     algo.animateNodes(ctx)
     algo.animatePath(ctx)
   })
-
-  resetbutton.addEventListener('click', e => {
+  
+  resetButton.addEventListener('click', e => {
+    e.preventDefault()
     algo.nodes.forEach (function(el){
       el.status = "unvisited"
     })
     algo.paths.forEach(function(el){
       el.status = "none"
     })
+    g.clearSelected()
     algo.graph.draw(ctx)
-
   })
 
-  // canvas.addEventListener('click', (event) => {
-  //   const isPointInPath = ctx.isPointInPath(node, event.offsetX, event.offsetY)
-  //   isPointInPath ? console.log("WAHOO") : console.log("no dice")})
-    // ctx.fillStyle = isPointInPath ? 'green' : 'red'
+  function getMousePosition(canvas, event) {
+    let rect = canvas.getBoundingClientRect();
+    let x = event.clientX - rect.left;
+    let y = event.clientY - rect.top;
+    return [x,y]
+  }
+  
+  canvas.addEventListener("click", function(e){
+    let pos = getMousePosition(canvas, e);
+    Object.keys(g.nodeHitBoxes).forEach (function (el){
+      let hitbox = g.nodeHitBoxes[el]
+      if (pos[0] > hitbox[2] && pos[0] < hitbox[3] && pos[1] > hitbox[0] && pos[1] < hitbox[1]){
+        let found = g.nodes.find(node => node.name === el) // ='a'
+        let result = selectedSpaceship()
+        if (result === -1){
+          found.selected = 'start'
+        } else if (result === 0){
+          found.selected = 'end'
+        } else{
+          g.clearSelected()
+        }
+        g.draw(ctx)
+      }
+    })
+  });
 
-
-  // function selectStart(){
-
-  // }
-
+  function selectedSpaceship(){
+    let start = 0
+    let end = 0
+    Object.keys(g.nodes).forEach (function(element){
+      let newVar = g.nodes[element]
+      if (newVar.selected === 'start'){
+        start +=1
+      } else if (newVar.selected === 'end'){
+        end +=1
+      }
+    })
+    return start === 0 && end === 0 ? -1: start === 1 && end === 0 ? 0 : 1 
+  }
 })
+
+
+
+
+
+
+
 
 window.Node = Node;
 window.Path = Path;

@@ -1,15 +1,10 @@
-const Node = require("./node.js");
-const Path = require("./path.js");
-const Graph = require("./graph.js");
-
 function Algorithm(){
-    this.graph = new Graph
+    this.graph = g
     this.nodes = this.graph.nodes
     this.paths = this.graph.paths
-    this.startNode = this.nodes[0]
-    this.endNode = this.nodes[this.nodes.length-1] //this.graph.nodes[this.graph.nodes.length-1] 
+    this.startNode = this.nodes.find(node => node.selected === 'start')
+    this.endNode = this.nodes.find(node => node.selected === 'end')
     this.visitedNodes = []
-    // this.associations = buildAssociations(this.graph)
 }
 
 Algorithm.prototype.determinePathing = function(){
@@ -31,14 +26,12 @@ Algorithm.prototype.determinePathing = function(){
     path[currentNode] = [0, currentNode]
 
     while (unvisitedNodes.length > 0){
-        // update currentNode with closest neighboring node
         currentNode = Object.entries(shortestDist)
             .filter(([key]) => unvisitedNodes.includes(key))
             .sort((a, b) => a[1] - b[1])[0][0];
         this.visitedNodes.push(currentNode)
         unvisitedNodes = unvisitedNodes.filter(el => el !== currentNode)
 
-        //update shortest distances
         let distToCurrent = shortestDist[currentNode]
         Object.keys(map[currentNode]).forEach(function(el){
             let ele = JSON.parse(el)
@@ -52,6 +45,7 @@ Algorithm.prototype.determinePathing = function(){
     }
     this.path = path
     //can refactor to combine path & shortestDist OR remove shortest Dist
+    //refactor forKeys loop?
 }
 
 Algorithm.prototype.buildMap = function(){
@@ -72,7 +66,7 @@ Algorithm.prototype.shortestPath = function(){
         shortest.push(currentNode)
         currentNode = this.path[currentNode][1]
     }
-    return (shortest.concat(this.startNode.name)).reverse()
+    return (shortest.concat(this.startNode.name)).reverse()   
 }
 
 
@@ -95,11 +89,10 @@ Algorithm.prototype.animateNodes = function(ctx){
   }
   
   Algorithm.prototype.animatePath = async function(ctx){
-      await this.animateNodes(ctx)
+        await this.animateNodes(ctx)
 
-  
-      let that = this
-          let shortest = that.shortestPath()
+        let that = this   
+        let shortest = that.shortestPath()
           for (let i = 0; i < shortest.length -1; i++){
               current = that.paths.find(path => path.parentNode.name === shortest[i] && path.childNode.name === shortest[i+1])
               current.status = 'shortest'
