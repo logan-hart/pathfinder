@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const ctx = canvas.getContext("2d");
 
-    window.ctx = ctx;
+  window.ctx = ctx;
 
   ctx.fillStyle = "#F5FCFF";
   ctx.fillRect(0, 0, 970, 600);
@@ -19,6 +19,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   g = new Graph
   g.draw(ctx)
+  // g.placePathHBs()
+  // g.draw(ctx)
   
   const startButton = document.getElementById('startbutton')
   const resetButton = document.getElementById('resetbutton')
@@ -206,9 +208,11 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   canvas.addEventListener("click", (e) => {
-    g.pathHitBoxes.forEach (function(node){
-      if (this.ctx.isPointInStroke(node, 0,0)){
-          console.log("hello")
+    let pos = getMousePosition(canvas, e);
+    g.pathHitBoxes.forEach (function(path){
+      if (this.ctx.isPointInStroke(path, pos[0], pos[1])){
+        g.paths[g.pathHitBoxes.indexOf(path)].traffic = 'light'
+        g.draw()
         } 
     })
   })

@@ -6,9 +6,9 @@ function Graph(){
         [ 100, 175 ],
         [ 200, 400 ],
         [ 400, 75 ],
-        [ 550, 475 ],
+        [ 550, 500 ],
         [ 750, 100 ],
-        [ 850, 400 ]]
+        [ 850, 325 ]]
     this.paths = []
     this.pathHitBoxes = []
     this.delay = 500
@@ -53,26 +53,6 @@ Graph.prototype.placePaths = function (){
     })
 }
 
-Graph.prototype.placePathHBs = function(){
-    const alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
-    for (let i = 0; i < this.paths.length; i++){
-        this.pathHitBoxes.push(pathBox(alpha[i], i))
-    }
-
-}
-function pathBox (name, i){
-    name = new Path2D()
-
-    name.moveTo(g.paths[i].startPos[0], g.paths[i].startPos[1])
-    name.lineTo(g.paths[i].endPos[0], g.paths[i].endPos[1])
-    ctx.lineWidth = 8;
-    ctx.strokeStyle = "red"
-    ctx.stroke(name);
-    return name
-}
-
-
-
 Graph.prototype.draw = function(ctx){
     ctx.clearRect(0, 0, 970, 600)
     ctx.fillStyle = "#fbfbfb";
@@ -88,6 +68,26 @@ Graph.prototype.draw = function(ctx){
     })
     this.annotate(ctx)
 }
+
+
+Graph.prototype.placePathHBs = function(){
+    const alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
+    for (let i = 0; i < this.paths.length; i++){
+        this.pathHitBoxes.push(pathBox(alpha[i], i))
+    }
+    g.draw(ctx)
+}
+function pathBox (name, i){
+    name = new Path2D()
+
+    name.moveTo(g.paths[i].startPos[0], g.paths[i].startPos[1])
+    name.lineTo(g.paths[i].endPos[0], g.paths[i].endPos[1])
+    ctx.lineWidth = 8;
+    ctx.strokeStyle = "#F5FCFF"
+    ctx.stroke(name);
+    return name
+}
+
 
 Graph.prototype.clearSelected = function(){
     Object.keys(g.nodes).forEach (function(element){
