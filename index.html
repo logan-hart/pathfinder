@@ -7,19 +7,33 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="./dist/main.css" />
     <script src="./dist/main.js" defer></script>
+    <style>
+      @font-face { font-family: Bungee; src: url('.dist/fonts.BungeeLayers-Inline.otf'); } 
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
     <title>Dijkstra's Determinator</title>
     <link rel="icon" type="image/x-icon" href="./images/flavicon.png">
   </head>
+
+  <style>
+    @font-face {
+      font-family: myFirstFont;
+      src: url(./fonts/);
+      font-weight: bold;
+    }
+  </style>
   
 
   <body>
-    <div><h1 id="title">Dijkstras Determinator</h1></div>
+    <div id="title"><h1>Dijkstras Determinator</h1></div>
     
     
-    <div id ="canvasdiv"><canvas id="canvas"></canvas></div>
-    <div id="instructions"></div>
-      <div><button type="button" id="startbutton" class="button" >- Animate -</button>
-      <button type="button" id="resetbutton" class ="button" disabled>- Reset -</button></div>
+    <div id="canvasdiv"><canvas id="canvas"></canvas></div>
+    <div id="animationspeed">Animation Speed</div>
+    <div id="animators"><button type="button" id="startbutton" class="button" >- Animate -</button>
+    <button type="button" id="resetbutton" class ="button" disabled>- Reset -</button></div>
     <div class="slidecontainer">
       <input type="range" min="50" max="1050" value="525" class="slider" id="myRange">
     </div>
@@ -32,7 +46,13 @@
         <button data-close-button class="close-button">&times;</button>
       </div>
       <div class="modal-body">
-      Dijastra's Algorithm determines the distance between all nodes on a graph.  
+        <p>Dijkstra's algorithm determines the shortest paths between nodes in a graph, which may represent, for example, road networks.
+        For any given source node in the graph, the algorithm finds the shortest path between that node and every other. It then determines
+        the shortest distance between the beginning and ending Nodes.</p>
+        <br/>
+        <p> Begin by clicking on a node to select it as the starting node on the graph. The next node you click will select your ending node.  By clicking animate, you will start the algorithm process of determining the shortest path between the beginning and ending nodes.</p>
+        <br/>
+        <p>Use the slider at the bottom of the screen to increase or decrease the animation speed.</p>
       </div>
     </div>
     <div class ="active" id="overlay"></div>

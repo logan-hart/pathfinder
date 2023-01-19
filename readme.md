@@ -20,7 +20,7 @@ An instruction set readme.
 
 # Basic Layout:
 
-![](wireframe.png)
+![](./images/wireframe.png)
 
 - Navigation Bar
 - Input instructions displaying what the user should do

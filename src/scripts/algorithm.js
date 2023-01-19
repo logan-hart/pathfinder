@@ -51,8 +51,6 @@ Algorithm.prototype.determinePathing = function(){
         })
     }
     this.path = path
-    //can refactor to combine path & shortestDist OR remove shortest Dist
-    //refactor forKeys loop?
 }
 
 Algorithm.prototype.buildMap = function(){
@@ -81,7 +79,6 @@ Algorithm.prototype.shortestPath = function(){
         return (shortest.concat(this.startNode.name)).reverse()   
     }
 }
-
 
 Algorithm.prototype.animateNodes = function(ctx){
     let visitedNodes = this.visitedNodes.slice(0)
@@ -113,31 +110,5 @@ Algorithm.prototype.animateNodes = function(ctx){
           }
       
   }
-
-// function drawLine(x1,y1,x2,y2,ctx,ratio) {
-//     ctx.fillRect(0,0,970,600);
-//     ctx.moveTo(x1,y1);
-//     x2 = x1 + ratio * (x2-x1);
-//     y2 = y1 + ratio * (y2-y1);
-//     ctx.lineTo(x2,y2);
-//     ctx.stroke();
-//   }
-  
-//   function animate(ratio) {
-//     ratio = ratio || 0;
-//     drawLine(0,0,300,300,ratio);
-//     if(ratio<1) {
-//       requestAnimationFrame(function() {
-//         animate(ratio + 0.01);
-//       });
-//     }
-//   }
-  
-
-
-  
-
-//     this.pos[0] += this.vel[0]
-// this.pos[1] += this.vel[1]
 
 module.exports = Algorithm;

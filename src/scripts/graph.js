@@ -8,8 +8,7 @@ function Graph(){
         [ 400, 75 ],
         [ 550, 475 ],
         [ 750, 100 ],
-        [ 850, 400 ]
-    ]
+        [ 850, 400 ]]
     this.paths = []
     this.pathHitBoxes = []
     this.delay = 500
@@ -54,25 +53,25 @@ Graph.prototype.placePaths = function (){
     })
 }
 
-Graph.prototype.pathHitBoxes = function(){
-
-    // for (let i = 0; i < this.nodes.length; i++){
-    //     let line = new Path2D()
-    //     debugger
-    //         line.moveTo(this.paths[i].startPos[0], this.paths[i].startPos[1])
-    //         line.lineTo()
-    // }
+Graph.prototype.placePathHBs = function(){
+    const alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
+    for (let i = 0; i < this.paths.length; i++){
+        this.pathHitBoxes.push(pathBox(alpha[i], i))
+    }
 
 }
+function pathBox (name, i){
+    name = new Path2D()
 
-Graph.prototype.getDeltas = function(){
-    let deltas = []
-    debugger
-    this.nodes.forEach (function(node){
-        deltas.push([(486 -node.pos[0])/100, (301 -node.pos[1])/100])
-    })
-    return deltas
+    name.moveTo(g.paths[i].startPos[0], g.paths[i].startPos[1])
+    name.lineTo(g.paths[i].endPos[0], g.paths[i].endPos[1])
+    ctx.lineWidth = 8;
+    ctx.strokeStyle = "red"
+    ctx.stroke(name);
+    return name
 }
+
+
 
 Graph.prototype.draw = function(ctx){
     ctx.clearRect(0, 0, 970, 600)
@@ -81,14 +80,13 @@ Graph.prototype.draw = function(ctx){
     this.paths.forEach(function (path){
         path.draw(ctx)
     })
-
-    // let deltas = this.getDeltas()
     for (let i = 0; i < this.nodes.length; i++){
         this.nodes[i].draw(ctx)
     }
     this.nodes.forEach(function(node){
         node.draw(ctx)
     })
+    this.annotate(ctx)
 }
 
 Graph.prototype.clearSelected = function(){
@@ -97,10 +95,14 @@ Graph.prototype.clearSelected = function(){
     })
 }
 
-// Graph.prototype.getRandomPositions = function(){
-    // future implimentation for creating new 'maps' with 
-    // minimum distance between other nodes and from border
-// }
+Graph.prototype.annotate = function (ctx){
+    this.nodes.forEach( function(node){
+        ctx.lineWidth = 1.5
+        ctx.strokeStyle = "black"
+        ctx.strokeText(`${node.name}`, node.pos[0] + 20, node.pos[1] + 20);
+    })
+}
+
 
 
 module.exports = Graph;

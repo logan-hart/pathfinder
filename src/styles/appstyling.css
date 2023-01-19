@@ -9,22 +9,26 @@ body {
     grid-template-rows: 20% 20% 20% 20% 20%;
     background-image: url(https://img.freepik.com/free-vector/white-clean-hexagonal-medical-concept_1017-29801.jpg?w=2000);
     background-size: cover;
-    font-family: Courier New;
+    font-family: 'Orbitron', sans-serif;
+}
+
+#title{
+    position: fixed;
+    left: 50%;
+    top: 4%;
+    transform: translateX(-50%);
+    width: 88%;
 }
    
-
 h1{
-    background: transparent;
-    text-align: center;
-    font-size: 6vw;
-
-    color: rgb(90, 89, 89);
-    text-shadow: 3px 3px 10px rgb(69, 70, 70);
+    font-size: 7vw;
+    color: #106fa1eb;
+    /* color: rgb(90, 89, 89); */
+    text-shadow: 3px 3px 10px rgb(88, 88, 88)
 }
 
 div {
-    border: 3px solid red;
-    width: fit-content;
+    width: auto;
     height: fit-content;
 }
 
@@ -33,7 +37,13 @@ canvas {
     border-width: 1px;
     border-radius: 7px;
     border-color: black;
-    box-shadow: 25px 25px 30px darkgrey;
+    box-shadow: 25px 25px 21px darkgrey;
+}
+#animators {
+    position: fixed;
+    top: 76%;
+    left: 68.5%;
+    transform: translateX(-50%);
 }
 
 #canvasdiv {    
@@ -47,8 +57,16 @@ canvas {
     font-size: larger;
     font-family: Courier New;
     border: none;
-    background-color: lightblue;
+    background-color: #1fa0e6eb;
     border-radius: 7px;
+    box-shadow: 6px 6px 5px darkgrey
+}
+
+#links{
+    display: flex;
+    position: fixed;
+    bottom: 5%;
+    left: 83%;
 }
 
 #links button{
@@ -56,12 +74,21 @@ canvas {
     border: none;
     background-color: transparent;
     cursor: pointer;
+    
 }
 
 #links img{
     align-items: flex-end;
     float: left;
-    width:  80px;
-    height: 80px;
+    width:  50px;
+    height: 50px;
     object-fit: cover;
+}
+
+#animationspeed {
+    position: fixed;
+    font-size: 19px;
+    top: 86.5%;
+    left: 50%;
+    transform: translateX(-50%)
 }

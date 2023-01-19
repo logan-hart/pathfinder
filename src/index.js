@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   ctx.fillStyle = "#F5FCFF";
   ctx.fillRect(0, 0, 970, 600);
-  ctx.font = "20px Courier New"
+  ctx.font = "20px helvetica"
 
   g = new Graph
   g.draw(ctx)
@@ -205,15 +205,16 @@ document.addEventListener("DOMContentLoaded", function () {
     g.delay = 1000 - this.value 
   }
 
+  canvas.addEventListener("click", (e) => {
+    g.pathHitBoxes.forEach (function(node){
+      if (this.ctx.isPointInStroke(node, 0,0)){
+          console.log("hello")
+        } 
+    })
+  })
+
 
 })
-
-
-
-
-
-
-
 
 window.Node = Node;
 window.Path = Path;

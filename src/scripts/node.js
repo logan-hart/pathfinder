@@ -36,17 +36,5 @@ Node.prototype.draw = function(ctx){
     
 }
 
-Node.prototype.annotate = function (){
-    
-}
-
-
-
-// Node.prototype.move = function (pos){
-// future implementation
-//     this.position = (pos)
-//     this.draw
-
-// }
 
 module.exports = Node;

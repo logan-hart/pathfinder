@@ -12,7 +12,7 @@
     border-radius: 10px;
     z-index: 10;
     background-color: white;
-    width: 1000px;
+    width: 800px;
     max-width: 80%;
 }
 
@@ -44,6 +44,7 @@
 
 .modal-body {
     padding: 10px 15px;
+    font-family:'Courier New', Courier, monospace;
 }
 
 #overlay{
