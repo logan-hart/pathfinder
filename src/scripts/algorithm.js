@@ -32,22 +32,21 @@ Algorithm.prototype.determinePathing = function(){
 
     shortestDist[currentNode] = 0    
     path[currentNode] = [0, currentNode]
-
+    
     while (unvisitedNodes.length > 0){
         currentNode = Object.entries(shortestDist)
-            .filter(([key]) => unvisitedNodes.includes(key))
-            .sort((a, b) => a[1] - b[1])[0][0];
+        .filter(([key]) => unvisitedNodes.includes(key))
+        .sort((a, b) => a[1] - b[1])[0][0];
         this.visitedNodes.push(currentNode)
         unvisitedNodes = unvisitedNodes.filter(el => el !== currentNode)
-
+        
         let distToCurrent = shortestDist[currentNode]
         Object.keys(map[currentNode]).forEach(function(el){
-            let ele = JSON.parse(el)
-            if (shortestDist[ele] > map[currentNode][el] + distToCurrent){
-                shortestDist[ele] = map[currentNode][el] + distToCurrent
+            if (shortestDist[el] > map[currentNode][el] + distToCurrent){
+                shortestDist[el] = map[currentNode][el] + distToCurrent
             }
-            if (path[ele].length === 0){
-                path[ele] = [(map[currentNode][el] + distToCurrent), currentNode]
+            if (path[el].length === 0){
+                path[el] = [(map[currentNode][el] + distToCurrent), currentNode]
             }
         })
     }

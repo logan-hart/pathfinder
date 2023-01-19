@@ -34,11 +34,10 @@ Node.prototype.draw = function(ctx){
     ctx.stroke();
     ctx.fill()
     
-    // ctx.beginPath();
-    // ctx.arc(this.pos[0], this.pos[1], this.radius, 0, Math.PI * 2, true);
-    // ctx.lineWidth = 1;
-    // ctx.stroke();
-    // ctx.fill();
+}
+
+Node.prototype.annotate = function (){
+    
 }
 
 

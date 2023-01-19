@@ -9,3 +9,9 @@
   -webkit-transition: .2s; /* 0.2 seconds transition on hover */
   transition: opacity .2s;
 }
+
+.slidecontainer{
+  grid-row-start: 5;
+  grid-column-start: 3
+  
+}

@@ -42,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
     })
     algo.paths.forEach(function(el){
       el.status = "none"
+      el.traffic = 'none'
     })
     g.clearSelected()
     algo.graph.draw(ctx)
@@ -72,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     })
   });
-
+  
   function selectedSpaceship(){
     let start = 0
     let end = 0
@@ -86,8 +87,120 @@ document.addEventListener("DOMContentLoaded", function () {
     })
     return start === 0 && end === 0 ? -1: start === 1 && end === 0 ? 0 : 1 
   }
+  // canvas.onmousedown = mouse_down
 
-  var slider = document.getElementById("myRange")
+
+  let is_dragging = false
+  let startX
+  let startY
+  let dragNode
+  let dragPos
+
+  canvas.addEventListener('mousedown', function(e){
+    dragPos = getMousePosition(canvas, e)
+    startX = dragPos[0]
+    startY = dragPos[1]
+    Object.keys(g.nodeHitBoxes).forEach (function (el){
+      let hitbox = g.nodeHitBoxes[el]
+      if (dragPos[0] > hitbox[2] && dragPos[0] < hitbox[3] && dragPos[1] > hitbox[0] && dragPos[1] < hitbox[1]){
+        dragNode = g.nodes.find(node => node.name === el)
+        is_dragging = true
+        return
+      }
+    })
+  })
+
+  let mouse_up = function(e){
+    e.preventDefault();
+    if (!is_dragging){
+      return;
+    }
+    is_dragging = false
+  }
+  let mouse_out = function(e){
+    e.preventDefault();
+    if (!is_dragging){
+      return;
+    }
+    is_dragging = false
+  }
+
+  let mouse_move = function (e){
+    if (!is_dragging){
+      return
+    } else {
+      e.preventDefault()
+      let dragPos = getMousePosition(canvas, e)
+      // let mouseX = parseInt(e.clientX)
+      // let mouseY = parseInt(e.clientY)
+
+      let dx = dragPos[0] - startX
+      let dy = dragPos[1] - startY
+      dragNode.pos[0] += dx
+      dragNode.pos[1] += dy
+
+      g.draw(ctx)
+      
+      startX = dragPos[0]
+      startY = dragPos[1]
+
+      g.paths.forEach(function (ele){
+        ele.distance = ele.calculateDistance()
+        ele.weight = ele.calculateWeight()
+        ele.associations()
+      })
+
+      g.buildHitBoxes()
+
+
+    }
+  }
+
+  canvas.onmouseup = mouse_up;
+  canvas.onmouseout = mouse_out;
+  canvas.onmousemove = mouse_move;
+
+  const openModalButtons = document.querySelectorAll('[data-modal-target]')
+  const closeModalButtons = document.querySelectorAll('[data-close-button]')
+  const overlay = document.getElementById('overlay')
+
+  overlay.addEventListener('click', () =>{
+    const modals = document.querySelectorAll('.modal.active')
+    modals.forEach(modal => {
+      closeModal()
+    })
+
+  })
+
+  openModalButtons.forEach(button => {
+    button.addEventListener('click', () =>{
+      const modal = document.querySelector(button.dataset.modalTarget)
+      openModal(modal)
+
+    })
+  })
+
+  closeModalButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const modal = button.closest('.modal')
+      closeModal(modal)
+    })
+  })
+
+  function openModal(modal){
+    if (modal == null) return 
+    modal.classList.add('active')
+    overlay.classList.add('active')
+  }
+
+  function closeModal(modal){
+    if (modal == null) return 
+    modal.classList.remove('active')
+    overlay.classList.remove('active')
+  }
+
+
+  let slider = document.getElementById("myRange")
   slider.oninput = function() {
     g.delay = 1000 - this.value 
   }

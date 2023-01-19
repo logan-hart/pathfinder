@@ -1,32 +1,38 @@
 function Graph(){
     this.nodes = []
-    this.paths = []
-    this.delay = 500
     // this.numNodes = numNodes
     this.nodeHitBoxes = {}
-    this.placeNodes()
-    this.placePaths()
-    this.draw(ctx)
-}
-
-Graph.prototype.placeNodes = function (){
-    const alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
-    let nodePositions = [
+    this.startingNodes = [
         [ 100, 175 ],
         [ 200, 400 ],
         [ 400, 75 ],
         [ 550, 475 ],
         [ 750, 100 ],
         [ 850, 400 ]
-      ]
-    for(let i = 0; i < nodePositions.length; i++){
-        this.nodes.push(new Node(alpha[i], nodePositions[i]))
+    ]
+    this.paths = []
+    this.pathHitBoxes = []
+    this.delay = 500
+    this.placeNodes()
+    this.placePaths()
+    this.buildHitBoxes()
+    this.draw(ctx)
+}
+
+Graph.prototype.placeNodes = function (){
+    const alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
+    
+    for(let i = 0; i < this.startingNodes.length; i++){
+        this.nodes.push(new Node(alpha[i], this.startingNodes[i]))
+    }
+}
+
+Graph.prototype.buildHitBoxes = function(){
+    const alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
+    for(let i = 0; i < this.startingNodes.length; i++){
+        this.nodeHitBoxes[alpha[i]] = [this.startingNodes[i][1] - 13, this.startingNodes[i][1] +13, this.startingNodes[i][0] -13, this.startingNodes[i][0] +13]
     }
 
-    // functionality here for adding node boxes to array?   
-    for(let i = 0; i < nodePositions.length; i++){
-        this.nodeHitBoxes[alpha[i]] = [nodePositions[i][1] - 13, nodePositions[i][1] +13, nodePositions[i][0] -13, nodePositions[i][0] +13]
-    }
 }
 
 Graph.prototype.placePaths = function (){
@@ -48,8 +54,24 @@ Graph.prototype.placePaths = function (){
     })
 }
 
-Graph.prototype.annotate = function(ctx){
-    // this.paths.
+Graph.prototype.pathHitBoxes = function(){
+
+    // for (let i = 0; i < this.nodes.length; i++){
+    //     let line = new Path2D()
+    //     debugger
+    //         line.moveTo(this.paths[i].startPos[0], this.paths[i].startPos[1])
+    //         line.lineTo()
+    // }
+
+}
+
+Graph.prototype.getDeltas = function(){
+    let deltas = []
+    debugger
+    this.nodes.forEach (function(node){
+        deltas.push([(486 -node.pos[0])/100, (301 -node.pos[1])/100])
+    })
+    return deltas
 }
 
 Graph.prototype.draw = function(ctx){
@@ -59,6 +81,11 @@ Graph.prototype.draw = function(ctx){
     this.paths.forEach(function (path){
         path.draw(ctx)
     })
+
+    // let deltas = this.getDeltas()
+    for (let i = 0; i < this.nodes.length; i++){
+        this.nodes[i].draw(ctx)
+    }
     this.nodes.forEach(function(node){
         node.draw(ctx)
     })
@@ -68,8 +95,7 @@ Graph.prototype.clearSelected = function(){
     Object.keys(g.nodes).forEach (function(element){
       g.nodes[element].selected = null
     })
-  }
-
+}
 
 // Graph.prototype.getRandomPositions = function(){
     // future implimentation for creating new 'maps' with 

@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 
   <head>
@@ -6,26 +7,40 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="./dist/main.css" />
     <script src="./dist/main.js" defer></script>
-    <title>Pathfinder</title>
+    <title>Dijkstra's Determinator</title>
     <link rel="icon" type="image/x-icon" href="./images/flavicon.png">
   </head>
   
 
   <body>
-    <h1>Path Optimizer</h1>
-    <canvas id="canvas"></canvas>
+    <div><h1 id="title">Dijkstras Determinator</h1></div>
+    
+    
+    <div id ="canvasdiv"><canvas id="canvas"></canvas></div>
     <div id="instructions"></div>
-    <button type="button" id="startbutton" class="button" >- Animate -</button>
-    <button type="button" id="resetbutton" class ="button">- Reset -</button>
+      <div><button type="button" id="startbutton" class="button" >- Animate -</button>
+      <button type="button" id="resetbutton" class ="button" disabled>- Reset -</button></div>
     <div class="slidecontainer">
       <input type="range" min="50" max="1050" value="525" class="slider" id="myRange">
     </div>
-    <d id="links">
-      <button  id="info"> <img src="./images/info.png"></button>
+
+    <div id="links">
+      <button data-modal-target="#modal"><img src="./images/info.png"></button>
+    <div class="modal active" id="modal">
+      <div class="modal-header">
+        <div class="title">Info</div>
+        <button data-close-button class="close-button">&times;</button>
+      </div>
+      <div class="modal-body">
+      Dijastra's Algorithm determines the distance between all nodes on a graph.  
+      </div>
+    </div>
+    <div class ="active" id="overlay"></div>
       <button onclick="window.location.href='https://github.com/logan-hart';"><img src="./images/github.png"></button>
       <button onclick="window.location.href='https://www.linkedin.com/in/logan-hartman4104';"><img src="./images/linkedin.png"></button>
     </div>
     <div></div>
+
   </body>
 
 </html>
