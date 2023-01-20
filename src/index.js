@@ -19,8 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   g = new Graph
   g.draw(ctx)
-  // g.placePathHBs()
-  // g.draw(ctx)
+
   
   const startButton = document.getElementById('startbutton')
   const resetButton = document.getElementById('resetbutton')
@@ -212,7 +211,7 @@ document.addEventListener("DOMContentLoaded", function () {
     g.pathHitBoxes.forEach (function(path){
       if (this.ctx.isPointInStroke(path, pos[0], pos[1])){
         g.paths[g.pathHitBoxes.indexOf(path)].traffic = 'light'
-        g.draw()
+        g.draw(ctx)
         } 
     })
   })

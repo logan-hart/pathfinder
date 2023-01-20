@@ -5,7 +5,8 @@ function Path (parentNode, childNode, traffic){
     this.endPos = this.getEndPos()
     this.delta = [Math.abs(this.startPos[0] - this.endPos[0]), Math.abs(this.startPos[1] - this.endPos[1])]
     this.distance = this.calculateDistance()
-    this.traffic = 'none'
+    const trafficStatus = ['none', 'light', 'medium', 'heavy']
+    this.traffic = trafficStatus[0]
     this.weight = this.calculateWeight()
     this.status = 'none'
     this.associations()

@@ -15,7 +15,6 @@ function Graph(){
     this.placeNodes()
     this.placePaths()
     this.buildHitBoxes()
-    this.draw(ctx)
 }
 
 Graph.prototype.placeNodes = function (){
@@ -31,7 +30,6 @@ Graph.prototype.buildHitBoxes = function(){
     for(let i = 0; i < this.startingNodes.length; i++){
         this.nodeHitBoxes[alpha[i]] = [this.startingNodes[i][1] - 13, this.startingNodes[i][1] +13, this.startingNodes[i][0] -13, this.startingNodes[i][0] +13]
     }
-
 }
 
 Graph.prototype.placePaths = function (){
@@ -57,6 +55,7 @@ Graph.prototype.draw = function(ctx){
     ctx.clearRect(0, 0, 970, 600)
     ctx.fillStyle = "#fbfbfb";
     ctx.fillRect(0, 0, 970, 600);
+    this.placePathHBs()
     this.paths.forEach(function (path){
         path.draw(ctx)
     })
@@ -66,6 +65,7 @@ Graph.prototype.draw = function(ctx){
     this.nodes.forEach(function(node){
         node.draw(ctx)
     })
+
     this.annotate(ctx)
 }
 
@@ -75,24 +75,16 @@ Graph.prototype.placePathHBs = function(){
     for (let i = 0; i < this.paths.length; i++){
         this.pathHitBoxes.push(pathBox(alpha[i], i))
     }
-    g.draw(ctx)
 }
+
 function pathBox (name, i){
     name = new Path2D()
-
     name.moveTo(g.paths[i].startPos[0], g.paths[i].startPos[1])
     name.lineTo(g.paths[i].endPos[0], g.paths[i].endPos[1])
     ctx.lineWidth = 8;
     ctx.strokeStyle = "#F5FCFF"
     ctx.stroke(name);
     return name
-}
-
-
-Graph.prototype.clearSelected = function(){
-    Object.keys(g.nodes).forEach (function(element){
-      g.nodes[element].selected = null
-    })
 }
 
 Graph.prototype.annotate = function (ctx){
@@ -102,6 +94,13 @@ Graph.prototype.annotate = function (ctx){
         ctx.strokeText(`${node.name}`, node.pos[0] + 20, node.pos[1] + 20);
     })
 }
+
+Graph.prototype.clearSelected = function(){
+    Object.keys(g.nodes).forEach (function(element){
+      g.nodes[element].selected = null
+    })
+}
+
 
 
 
