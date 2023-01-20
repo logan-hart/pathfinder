@@ -20,7 +20,10 @@ Path.prototype.getEndPos = function(){
 }
 
 Path.prototype.calculateDistance = function(){
-    return Math.sqrt(Math.pow((this.startPos[0] - this. endPos[0]),2) + Math.pow((this. startPos[1] + this.endPos[1]),2))
+    let a = this.startPos[0] - this.endPos[0]
+    let b = this.startPos[1] - this.endPos[1]
+    let c = Math.sqrt(Math.pow((a),2) + Math.pow((b),2))
+    return Math.round(c/96*10) / 10
 }
 
 Path.prototype.calculateWeight = function (){
@@ -31,7 +34,7 @@ Path.prototype.calculateWeight = function (){
     }else if (this.traffic === 'heavy'){
         return Math.floor(this.distance * 1.8 )
     }else {
-        return Math.floor(this.distance)
+        return this.distance
     }
 }
 
