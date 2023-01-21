@@ -29,11 +29,11 @@ Path.prototype.calculateDistance = function(){
 
 Path.prototype.calculateWeight = function (){
     if (this.traffic === 'light'){
-        return Math.floor(this.distance * 1.5 )
+        return this.distance * 1.5 
     }else if (this.traffic === 'medium'){
-        return Math.floor(this.distance * 2.0 )
+        return this.distance * 2.0 
     }else if (this.traffic === 'heavy'){
-        return Math.floor(this.distance * 2.5 )
+        return this.distance * 2.5
     }else {
         return this.distance
     }
