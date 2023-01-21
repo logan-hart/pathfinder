@@ -1,39 +1,43 @@
 # Background:
 
-Dijkstra’s Algorithm algorithm determines the shortest distance between all nodes in a multi-node system. Functionality useful for mapping efficiency and shortest pathing between nodes. This visualization allows a user to select a starting and ending node, and see an animation depicting each iteration of the algorithm (by highlighting each node/path) as it determines the shortest distance pathing between all nodes. It then highlights the optimal path. 
+The algorithm on this page dynamically determines the shortest distance between all nodes on the graph and highlights the shortest path between the starting and ending node. It was developed from the ground up by referencing the psuedo-code for Dijkstra's shortest path algorithm. 
 
-Additional functionality as follows. First, removal and/or creation of nodes/pathing on click/drag. Second, ‘traffic simulation’ allowing the user to increasing the ‘travel time’ between the nodes on-click, potentially re-routing the shortest path. Third, multiple nodes of transportation each with its own associated ‘travel time’ — walking vs. subway/public transportation vs. driving. Fourth, toggling between pathing options such as ‘fastest’, ‘fewest transfers’, ‘lowest price.’ Later expansion potential for actual map overlay. 
+Functionally Dijkstra's algorithm is useful for mapping efficiency and shortest pathing between nodes.
+
+This visualization allows a user to select a starting and ending node, and animate each iteration of the algorithm (by highlighting each node) as it determines the shortest distance pathing between all nodes on the graph. It then highlights the optimal path.
+
+Nodes may be dragged/dropped to a new location on the graph and the distance dynamically updates. The slider at the bottom increases/decreases the animation time. 
+
+Planned future functionality includes. ‘Traffic simulation’ allowing the user to increasing the ‘travel time’ between the nodes on-click.
+
+ Multiple nodes of transportation each with its own associated ‘travel time’ — walking vs. subway vs. driving. Toggling between pathing options such as 'distance' ‘fastest’, ‘fewest transfers’, ‘lowest price.’ Actual map overlay . 
 
 # Functionality & MVPs:
 
 With the Path Optimizer visualization, users will be able to:
 
 Select a starting and ending node.
-Through point/click functionality, interactively increase or the 'travel time' between nodes.
+Through drag/drop functionality, interactively move nodes to new locations on the graph.
 Play an animation visualizing the process of Dijkstra's Algorithm.
 
 In addition, this project will include:
-
-The ability for the user to move nodes on the grid.
 An active slider to increase/decrease the animation speed. 
-An instruction set readme.
+An instructional legend and modal readme.
 
 # Basic Layout:
 
 ![](./images/wireframe.png)
 
 - Navigation Bar
-- Input instructions displaying what the user should do
 - Node Graph displaying the nodes and paths between the nodes on the graph.
 - A button to begin/pause/stop the animation
 - A slider to increase/decrease animation speed
-- An additional options panel fo interactive options
 - Links to github and Linked in
 
 # This project will be implemented with the following technologies:
 
 1. Canvas will be used to render the graph
-2. Webpack to bundle the source JavaScript code
+2. Webpack to bundle the source JavaScript code Bable for interpolation
 3. npm to manage project dependencies
 
 # Implementation Timeline:
@@ -48,4 +52,4 @@ Tuesday: Continue event handling. Develop logic for the user to drag/drop nodes,
 
 Wednesday: Finish implementing of any outlying features. Look into adding functionality for map over/lay and differing modes of transportation. 
 
-Thursday Morning: Deploy to GitHub pages. If time, rewrite this proposal as a production README.
+Thursday Morning: Deploy to GitHub pages. 
