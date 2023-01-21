@@ -24,42 +24,56 @@ Path.prototype.calculateDistance = function(){
     let a = this.startPos[0] - this.endPos[0]
     let b = this.startPos[1] - this.endPos[1]
     let c = Math.sqrt(Math.pow((a),2) + Math.pow((b),2))
-    return Math.round(c/96*10) / 10
+    return c/96
 }
 
 Path.prototype.calculateWeight = function (){
     if (this.traffic === 'light'){
-        return Math.floor(this.distance * 1.2 )
+        return Math.floor(this.distance * 1.5 )
     }else if (this.traffic === 'medium'){
-        return Math.floor(this.distance * 1.2 )
+        return Math.floor(this.distance * 2.0 )
     }else if (this.traffic === 'heavy'){
-        return Math.floor(this.distance * 1.8 )
+        return Math.floor(this.distance * 2.5 )
     }else {
         return this.distance
     }
 }
 
 Path.prototype.draw = function(ctx){
+    if(this.status === 'shortest'){
+        ctx.beginPath();
+        ctx.strokeStyle = '#0288d1'
+        ctx.lineWidth = 12
+        ctx.moveTo(this.startPos[0], this.startPos[1]);
+        ctx.lineTo(this.endPos[0], this.endPos[1]);
+        ctx.stroke();
+    } 
+
     ctx.beginPath();
     if (this.traffic === 'light'){
         ctx.strokeStyle = 'yellow'
-        ctx.lineWidth = 4
+        ctx.lineWidth = 6
     }else if (this.traffic === 'medium'){
         ctx.strokeStyle = 'orange'
-        ctx.lineWidth = 4
+        ctx.lineWidth = 6
     } else if (this.traffic === 'heavy'){
         ctx.strokeStyle = 'red'
-        ctx.lineWidth = 4
-    }  else if (this.status === 'shortest'){
+        ctx.lineWidth = 6
+    }  else if(this.status === 'shortest'){
         ctx.strokeStyle = '#0288d1'
-        ctx.lineWidth = 8
-    } else { 
-        ctx.strokeStyle = 'black'
-        ctx.lineWidth = 1
-    }
+        ctx.lineWidth = 6
+    } 
     ctx.moveTo(this.startPos[0], this.startPos[1]);
     ctx.lineTo(this.endPos[0], this.endPos[1]);
     ctx.stroke();
+
+    ctx.beginPath();
+    ctx.strokeStyle = 'black'
+    ctx.lineWidth = 1
+    ctx.moveTo(this.startPos[0], this.startPos[1]);
+    ctx.lineTo(this.endPos[0], this.endPos[1]);
+    ctx.stroke();
+
 }
 
 Path.prototype.associations = function (){

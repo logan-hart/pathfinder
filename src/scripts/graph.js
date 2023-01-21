@@ -81,8 +81,8 @@ function pathBox (name, i){
     name = new Path2D()
     name.moveTo(g.paths[i].startPos[0], g.paths[i].startPos[1])
     name.lineTo(g.paths[i].endPos[0], g.paths[i].endPos[1])
-    ctx.lineWidth = 8;
-    ctx.strokeStyle = "#F5FCFF"
+    ctx.lineWidth = 10;
+    ctx.strokeStyle = "#fbfbfb"
     ctx.stroke(name);
     return name
 }

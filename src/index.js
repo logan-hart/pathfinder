@@ -2,31 +2,45 @@ const Node = require("./scripts/node.js");
 const Path = require("./scripts/path.js");
 const Graph = require("./scripts/graph.js")
 const Algorithm = require("./scripts/algorithm.js")
+const Legend = require("./scripts/legend.js")
 
 
 document.addEventListener("DOMContentLoaded", function () {
-  const canvas = document.getElementById("canvas");
-  canvas.width = 970;
-  canvas.height = 600;
-
-  const ctx = canvas.getContext("2d");
-
-  window.ctx = ctx;
-
-  ctx.fillStyle = "#F5FCFF";
-  ctx.fillRect(0, 0, 970, 600);
-  ctx.font = "20px helvetica"
-
-  g = new Graph
-  g.draw(ctx)
-
-  
+  const graphcanvas = document.getElementById("graphcanvas");
+  const legendcanvas = document.getElementById("legendcanvas")
+  const ctx = graphcanvas.getContext("2d");
+  const ctx2 = legendcanvas.getContext("2d");
   const startButton = document.getElementById('startbutton')
   const resetButton = document.getElementById('resetbutton')
   
+  window.ctx = ctx;
+  window.Node = Node;
+  window.Path = Path;
+  window.Graph = Graph;
+  window.Algorithm = Algorithm;
+
+  graphcanvas.width = 940;
+  graphcanvas.height = 600;
+
+  legendcanvas.width = 293;
+  legendcanvas.height = 600;
+
+  ctx.fillRect(0, 0, 970, 600);
+  ctx.font = "20px helvetica"
+  
+  ctx2.fillStyle = "#fbfbfb";
+  ctx2.fillRect(0, 0, 970, 600);
+
+  g = new Graph
+  g.draw(ctx)
+  l = new Legend
+
   startButton.addEventListener('click', e => {
     e.preventDefault()
     algo = new Algorithm
+    algo.paths.forEach(function(el){
+      el.status = 'none'
+    })
     algo.determinePathing()
     algo.animateNodes(ctx)
     algo.animatePath(ctx)
@@ -42,22 +56,21 @@ document.addEventListener("DOMContentLoaded", function () {
       el.status = "unvisited"
     })
     algo.paths.forEach(function(el){
-      el.status = "none"
       el.traffic = 'none'
+      el.status = 'none'
     })
-    g.clearSelected()
     algo.graph.draw(ctx)
   })
-
-  function getMousePosition(canvas, event) {
-    let rect = canvas.getBoundingClientRect();
+  
+  function getMousePosition(graphcanvas, event) {
+    let rect = graphcanvas.getBoundingClientRect();
     let x = event.clientX - rect.left;
     let y = event.clientY - rect.top;
     return [x,y]
   }
   
-  canvas.addEventListener("click", function(e){
-    let pos = getMousePosition(canvas, e);
+  graphcanvas.addEventListener("click", function(e){
+    let pos = getMousePosition(graphcanvas, e);
     Object.keys(g.nodeHitBoxes).forEach (function (el){
       let hitbox = g.nodeHitBoxes[el]
       if (pos[0] > hitbox[2] && pos[0] < hitbox[3] && pos[1] > hitbox[0] && pos[1] < hitbox[1]){
@@ -74,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     })
   });
-  
+
   function selectedSpaceship(){
     let start = 0
     let end = 0
@@ -88,8 +101,25 @@ document.addEventListener("DOMContentLoaded", function () {
     })
     return start === 0 && end === 0 ? -1: start === 1 && end === 0 ? 0 : 1 
   }
-  // canvas.onmousedown = mouse_down
-
+  
+  graphcanvas.addEventListener("click", (e) => {
+    let pos = getMousePosition(graphcanvas, e);
+    let trafficStatus = ['none', 'light', 'medium', 'heavy' ]
+    let inNode
+    Object.keys(g.nodeHitBoxes).forEach (function (el){
+      let hitbox = g.nodeHitBoxes[el]
+      if (pos[0] > hitbox[2] && pos[0] < hitbox[3] && pos[1] > hitbox[0] && pos[1] < hitbox[1]) inNode = true
+    })
+    g.pathHitBoxes.forEach (function(path){
+      if (this.ctx.isPointInStroke(path, e.offsetX, e.offsetY) && !inNode){
+        let currentPath = g.paths[g.pathHitBoxes.indexOf(path)]
+        let currentTraffic = trafficStatus.indexOf(currentPath.traffic)
+        currentPath.traffic = trafficStatus[currentTraffic+1]
+        currentPath.calculateWeight()
+        g.draw(ctx)
+      } 
+    })
+  })
 
   let is_dragging = false
   let startX
@@ -97,8 +127,8 @@ document.addEventListener("DOMContentLoaded", function () {
   let dragNode
   let dragPos
 
-  canvas.addEventListener('mousedown', function(e){
-    dragPos = getMousePosition(canvas, e)
+  graphcanvas.addEventListener('mousedown', function(e){
+    dragPos = getMousePosition(graphcanvas, e)
     startX = dragPos[0]
     startY = dragPos[1]
     Object.keys(g.nodeHitBoxes).forEach (function (el){
@@ -131,7 +161,7 @@ document.addEventListener("DOMContentLoaded", function () {
       return
     } else {
       e.preventDefault()
-      let dragPos = getMousePosition(canvas, e)
+      let dragPos = getMousePosition(graphcanvas, e)
       // let mouseX = parseInt(e.clientX)
       // let mouseY = parseInt(e.clientY)
 
@@ -152,14 +182,17 @@ document.addEventListener("DOMContentLoaded", function () {
       })
 
       g.buildHitBoxes()
-
-
     }
   }
 
-  canvas.onmouseup = mouse_up;
-  canvas.onmouseout = mouse_out;
-  canvas.onmousemove = mouse_move;
+  graphcanvas.onmouseup = mouse_up;
+  graphcanvas.onmouseout = mouse_out;
+  graphcanvas.onmousemove = mouse_move;
+
+  const slider = document.getElementById("myRange")
+  slider.oninput = function() {
+    g.delay = 1000 - this.value 
+  }
 
   const openModalButtons = document.querySelectorAll('[data-modal-target]')
   const closeModalButtons = document.querySelectorAll('[data-close-button]')
@@ -201,25 +234,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 
-  let slider = document.getElementById("myRange")
-  slider.oninput = function() {
-    g.delay = 1000 - this.value 
-  }
-
-  canvas.addEventListener("click", (e) => {
-    let pos = getMousePosition(canvas, e);
-    g.pathHitBoxes.forEach (function(path){
-      if (this.ctx.isPointInStroke(path, pos[0], pos[1])){
-        g.paths[g.pathHitBoxes.indexOf(path)].traffic = 'light'
-        g.draw(ctx)
-        } 
-    })
-  })
-
 
 })
 
-window.Node = Node;
-window.Path = Path;
-window.Graph = Graph;
-window.Algorithm = Algorithm;

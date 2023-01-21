@@ -16,8 +16,8 @@
 
 .slidecontainer {
   position: fixed;
-  top: 90%;
+  top: 109%;
   left: 50%;
   transform: translateX(-50%);
-  width: 250px
+  width: 250px;
 }

@@ -1,3 +1,6 @@
+/*!****************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/reset.css ***!
+  \****************************************************************************************************/
 /* 
     http://meyerweb.com/eric/tools/css/reset/ 
     v2.0 | 20110126
@@ -48,6 +51,9 @@ table {
 	border-spacing: 0;
 }
 
+/*!*********************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/appstyling.css ***!
+  \*********************************************************************************************************/
 html, body {
     margin: 0;
     height: 100%;
@@ -91,23 +97,23 @@ canvas {
 }
 #animators {
     position: fixed;
-    top: 76%;
-    left: 68.5%;
-    transform: translateX(-50%);
+    top: 92%;
+    left: 69%;
 }
 
 #canvasdiv {    
     position: fixed;
     top: 50%;
-    left: 50%;
+    left: 38%;
     transform: translate(-50%, -50%);
 }
 
 .button {
     font-size: larger;
     font-family: Courier New;
+    margin: 5px;
     border: none;
-    background-color: #1fa0e6eb;
+    background-color: #d3d3d3;
     border-radius: 7px;
     box-shadow: 6px 6px 5px darkgrey
 }
@@ -115,8 +121,9 @@ canvas {
 #links{
     display: flex;
     position: fixed;
-    bottom: 5%;
-    left: 83%;
+    bottom: -17%;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 #links button{
@@ -137,11 +144,63 @@ canvas {
 
 #animationspeed {
     position: fixed;
-    font-size: 19px;
-    top: 86.5%;
-    left: 50%;
-    transform: translateX(-50%)
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 21px;
+    top: 115.5%;
+    left: 50.75%;
+    transform: translateX(-50%);
+    width: 100%;
+    text-align: center;
 }
+
+#legenddiv {position: fixed;
+    position: fixed;
+    top: 50%;
+    right: -52%;
+    transform: translate(-50%, -50%);
+}
+
+#legendtxt {
+    font-size: x-large;
+    font-family: 'Courier New', Courier, monospace;
+    position: fixed;
+    top: 2%;
+    left: 49%;
+    transform: translateX(-50%);
+}
+
+.legend{
+    position: fixed;
+    display: inline;
+    font-family:  Courier New;
+    font-size: 20px;
+    color: black;
+}
+
+#legendkeys{
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+    top: 30%;
+    left: 13%;
+}
+
+.hex{
+    font-size: 50px;
+}
+
+#legendstart{
+    top: 33.5%;
+    left: 27.5%;
+}
+
+#legendend{
+    top: 42%;
+    left: 27.5%;
+}
+/*!*****************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/slider.css ***!
+  \*****************************************************************************************************/
 .slider {
   -webkit-appearance: none;  
   appearance: none;
@@ -160,11 +219,14 @@ canvas {
 
 .slidecontainer {
   position: fixed;
-  top: 90%;
+  top: 109%;
   left: 50%;
   transform: translateX(-50%);
-  width: 250px
+  width: 250px;
 }
+/*!****************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/modal.css ***!
+  \****************************************************************************************************/
 *, *::after, *::before {
    box-sizing: border-box; 
 }
@@ -232,6 +294,7 @@ canvas {
     opacity: 1;
     pointer-events: all;
 }
+/*!*************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss ***!
+  \*************************************************************************************************************************************/
 
-
-/*# sourceMappingURL=main.css.map*/
