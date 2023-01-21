@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const resetButton = document.getElementById('resetbutton')
   
   window.ctx = ctx;
+  window.ctx2 = ctx2
   window.Node = Node;
   window.Path = Path;
   window.Graph = Graph;
@@ -69,39 +70,6 @@ document.addEventListener("DOMContentLoaded", function () {
     return [x,y]
   }
   
-  graphcanvas.addEventListener("click", function(e){
-    let pos = getMousePosition(graphcanvas, e);
-    Object.keys(g.nodeHitBoxes).forEach (function (el){
-      let hitbox = g.nodeHitBoxes[el]
-      if (pos[0] > hitbox[2] && pos[0] < hitbox[3] && pos[1] > hitbox[0] && pos[1] < hitbox[1]){
-        let found = g.nodes.find(node => node.name === el)
-        let result = selectedSpaceship()
-        if (result === -1){
-          found.selected = 'start'
-        } else if (result === 0 && found.selected !== 'start'){
-          found.selected = 'end'
-        } else{
-          g.clearSelected()
-        }
-        g.draw(ctx)
-      }
-    })
-  });
-
-  function selectedSpaceship(){
-    let start = 0
-    let end = 0
-    Object.keys(g.nodes).forEach (function(element){
-      let newVar = g.nodes[element]
-      if (newVar.selected === 'start'){
-        start +=1
-      } else if (newVar.selected === 'end'){
-        end +=1
-      }
-    })
-    return start === 0 && end === 0 ? -1: start === 1 && end === 0 ? 0 : 1 
-  }
-  
   graphcanvas.addEventListener("click", (e) => {
     let pos = getMousePosition(graphcanvas, e);
     let trafficStatus = ['none', 'light', 'medium', 'heavy' ]
@@ -125,29 +93,84 @@ document.addEventListener("DOMContentLoaded", function () {
   let startX
   let startY
   let dragNode
-  let dragPos
+  let downPos
 
   graphcanvas.addEventListener('mousedown', function(e){
-    dragPos = getMousePosition(graphcanvas, e)
-    startX = dragPos[0]
-    startY = dragPos[1]
+    [startX, startY] = getMousePosition(graphcanvas, e)
+    downPos = Array.from(getMousePosition(graphcanvas, e))
     Object.keys(g.nodeHitBoxes).forEach (function (el){
       let hitbox = g.nodeHitBoxes[el]
-      if (dragPos[0] > hitbox[2] && dragPos[0] < hitbox[3] && dragPos[1] > hitbox[0] && dragPos[1] < hitbox[1]){
+      if (startX > hitbox[2] && startX < hitbox[3] && startY > hitbox[0] && startY < hitbox[1]){
         dragNode = g.nodes.find(node => node.name === el)
         is_dragging = true
         return
       }
     })
+    console.log(getMousePosition(graphcanvas, e))
   })
 
   let mouse_up = function(e){
     e.preventDefault();
+    console.log(getMousePosition(graphcanvas, e))
+    let [currentX, currentY] = getMousePosition(graphcanvas, e)
+    let distance = Math.sqrt(Math.pow(currentX- downPos[0], 2) + Math.pow(currentY - startY, 2));
+    debugger
+    if (distance <= 3){
+      Object.keys(g.nodeHitBoxes).forEach (function (el){
+        let hitbox = g.nodeHitBoxes[el]
+        if (startX > hitbox[2] && startX < hitbox[3] && startY > hitbox[0] && startY < hitbox[1]){
+          let found = g.nodes.find(node => node.name === el)
+          let result = selectedSpaceship()
+          if (result === -1){
+            found.selected = 'start'
+          } else if (result === 0 && found.selected !== 'start'){
+            found.selected = 'end'
+          } else{
+            g.clearSelected()
+          }
+          g.draw(ctx)
+        }
+      })
+    } 
     if (!is_dragging){
       return;
     }
     is_dragging = false
   }
+
+  function selectedSpaceship(){
+    let start = 0
+    let end = 0
+    Object.keys(g.nodes).forEach (function(element){
+      let newVar = g.nodes[element]
+      if (newVar.selected === 'start'){
+        start +=1
+      } else if (newVar.selected === 'end'){
+        end +=1
+      }
+    })
+    return start === 0 && end === 0 ? -1: start === 1 && end === 0 ? 0 : 1 
+  }
+
+  // graphcanvas.addEventListener("click", function(e){
+  //   let pos = getMousePosition(graphcanvas, e);
+  //   Object.keys(g.nodeHitBoxes).forEach (function (el){
+  //     let hitbox = g.nodeHitBoxes[el]
+  //     if (pos[0] > hitbox[2] && pos[0] < hitbox[3] && pos[1] > hitbox[0] && pos[1] < hitbox[1]){
+  //       let found = g.nodes.find(node => node.name === el)
+  //       let result = selectedSpaceship()
+  //       if (result === -1){
+  //         found.selected = 'start'
+  //       } else if (result === 0 && found.selected !== 'start'){
+  //         found.selected = 'end'
+  //       } else{
+  //         g.clearSelected()
+  //       }
+  //       g.draw(ctx)
+  //     }
+  //   })
+  // });
+
   let mouse_out = function(e){
     e.preventDefault();
     if (!is_dragging){
@@ -162,8 +185,6 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
       e.preventDefault()
       let dragPos = getMousePosition(graphcanvas, e)
-      // let mouseX = parseInt(e.clientX)
-      // let mouseY = parseInt(e.clientY)
 
       let dx = dragPos[0] - startX
       let dy = dragPos[1] - startY
