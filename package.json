@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=production node_modules/react-scripts/bin/react-scripts.js start",
-    "watch": "webpack --watch --mode=development",
+    "start": "webpack --watch --mode=development",
+
     "build": "webpack --mode=production"
   },
   "browserslist": [

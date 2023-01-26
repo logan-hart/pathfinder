@@ -7,61 +7,66 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="./dist/main.css" />
     <script src="./dist/main.js" defer></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    
     <title>Dijkstra's Determinator</title>
-    <link rel="icon" type="image/x-icon" href="./images/flavicon.png">
+    <link rel="icon" type="image/x-icon" href="./images/favicon.jpg">
   </head>
   
    <body>
-    <div id="title"><h1>Dijkstras Determinator</h1></div>
-    
-    
-    
-    <div id="canvasdiv">
-      <canvas id="graphcanvas"></canvas>
-      <div class="slidecontainer">
-        <input type="range" min="50" max="1050" value="525" class="slider" id="myRange">
-      </div>
-      <div id="animationspeed">Animation Speed</div>
-      <div id="animators">
-        <button type="button" id="startbutton" class="button" >- Animate -</button>
-        <button type="button" id="resetbutton" class ="button" disabled>- Reset -</button>
-      </div>
-      <div id="legenddiv">
-        <div id="legendtxt">- Legend -</div>
-        <canvas id="legendcanvas"></canvas>
-        <div id="legendkeys"
-">
-          <div class="hex" style="color: green;">&#x2B22;<div class="legend" id="legendstart"> = start node</div></div>
-          <div class="hex" style="color: red;" >&#x2B22;<div class="legend" id="legendend"> = end node</div></div>
-        </div>
-        <div id="links">
-          <button data-modal-target="#modal"><img src="./images/info.png"></button>
-          <button onclick="window.location.href='https://github.com/logan-hart';"><img src="./images/github.png"></button>
-          <button onclick="window.location.href='https://www.linkedin.com/in/logan-hartman4104';"><img src="./images/linkedin.png"></button>
-        </div>
-      </div>
-    </div>
-
-    <div class="modal active" id="modal">
-      <div class="modal-header">
-        <div class="title">Info</div>
-        <button data-close-button class="close-button">&times;</button>
-      </div>
-      <div class="modal-body">
-        <p>Dijkstra's algorithm determines the shortest paths between nodes in a graph, which may represent, for example, road networks.
-        For any given source node in the graph, the algorithm finds the shortest path between that node and every other. It then determines
-        the shortest distance between the beginning and ending Nodes.</p>
-        <br/>
-        <p> Begin by clicking on a node to select it as the starting node on the graph. The next node you click will select your ending node.  By clicking animate, you will start the algorithm process of determining the shortest path between the beginning and ending nodes.</p>
-        <br/>
-        <p>Use the slider at the bottom of the screen to increase or decrease the animation speed.</p>
-      </div>
-    </div>
-    <div class="active" id="overlay"></div>
+    <div>
       
+      <div id="canvasdiv">
+        <div id="title"><h1>Pathfinder</h1></div>
+        <canvas id="graphcanvas"></canvas>
+        <button data-modal-target="#modal" class="linkimg" id="info"><img src="./images/info.png"></button>
+        
+        
+        <div id="legenddiv">
+          <canvas id="legendcanvas"></canvas>
+          <div id="animators">
+            <button type="button" id="startbutton" class="button" > Animate </button>
+            <button type="button" id="resetbutton" class ="button" disabled> Reset </button>
+          </div>
+          <div class="slidecontainer">
+            <input type="range" min="50" max="1050" value="525" class="slider" id="myRange">
+            <div id="animationspeed">Animation Speed</div>
+          </div>
+        </div>
+
+        <div id="navdiv"></div>
+          <div id="links">
+            <button class="linkimg" onclick="window.location.href='https://github.com/logan-hart';"><img src="./images/github.png"></button>
+            <button class="linkimg" onclick="window.location.href='https://www.linkedin.com/in/logan-hartman4104';"><img src="./images/linkedin.png"></button>
+          </div>
+        <div>
+          <div id="legendtxt">Legend </div>
+          <canvas id="legendcanvas" hidden></canvas>
+          <p id="start">=  start</p>
+          <p id="end">= end</p>
+          <div id="legendkeys">
+          </div>
+          
+          
+        </div>
+      </div>
+
+      <div class="modal active" id="modal">
+        <div class="modal-header">
+          <div class="title">Info</div>
+          <button data-close-button class="close-button">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>Dijkstra's algorithm determines the shortest paths between nodes in a graph, which may represent, for example, road networks.
+          For any given source node in the graph, the algorithm finds the shortest path between that node and every other. It then determines
+          the shortest distance between the beginning and ending Nodes.</p>
+          <br/>
+          <p> Begin by clicking on a node to select it as the starting node on the graph. The next node you click will select your ending node.  By clicking animate, you will start the algorithm process of determining the shortest path between the beginning and ending nodes.</p>
+          <br/>
+          <p>Use the slider at the bottom of the screen to increase or decrease the animation speed.</p>
+        </div>
+      </div>
+      <div class="active" id="overlay"></div>
+  </div>
   </body>
 
 </html>

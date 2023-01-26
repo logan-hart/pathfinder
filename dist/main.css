@@ -54,33 +54,42 @@ table {
 /*!*********************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/appstyling.css ***!
   \*********************************************************************************************************/
+@font-face {
+    font-family: 'Futurism';
+    src: url('../../dist/fonts/Futurism.otf') format('woff2');
+  }
+
 html, body {
     margin: 0;
     height: 100%;
+    user-select: none;
 }
 
 body {
     display: grid;
     grid-template-columns: 20% 20% 20% 20% 20%;
     grid-template-rows: 20% 20% 20% 20% 20%;
-    background-image: url(https://img.freepik.com/free-vector/white-clean-hexagonal-medical-concept_1017-29801.jpg?w=2000);
+    background-image: url('../../images/blueGradient.jpg');
     background-size: cover;
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Futurism';
 }
 
 #title{
     position: fixed;
-    left: 50%;
-    top: 4%;
+    font-family: "Futurism";
+    left: 38%;
+    top: -5%;
     transform: translateX(-50%);
     width: 88%;
+    z-index: 11;
+    pointer-events: none;
 }
    
 h1{
-    font-size: 7vw;
-    color: #106fa1eb;
-    /* color: rgb(90, 89, 89); */
-    text-shadow: 3px 3px 10px rgb(88, 88, 88)
+    font-size: 7.5rem;
+    color: white;
+    text-shadow: 5px 5px 3px rgb(0 0 0 / 51%);
+    pointer-events: none;
 }
 
 div {
@@ -89,84 +98,75 @@ div {
 }
 
 canvas {
-   border-style: solid;
-    border-width: 1px;
-    border-radius: 7px;
-    border-color: black;
-    box-shadow: 25px 25px 21px darkgrey;
+    box-shadow: 10px 10px 10px rgb(0, 0, 0, .2);
 }
+
 #animators {
-    position: fixed;
-    top: 92%;
-    left: 69%;
+    position: relative;
+    top: 84%;
+    left: 50%;
+    z-index: 3;
+    transform: translateX(-50%);
 }
 
 #canvasdiv {    
     position: fixed;
     top: 50%;
-    left: 38%;
+    left: 50%;
     transform: translate(-50%, -50%);
 }
 
 .button {
-    font-size: larger;
-    font-family: Courier New;
+    font-size: medium;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
     margin: 5px;
-    border: none;
-    background-color: #d3d3d3;
-    border-radius: 7px;
-    box-shadow: 6px 6px 5px darkgrey
+    border: 1px solid white;
+    background-color: rgba(255,255,255, .2);
+    border-radius: 20px;
+    padding: 3px 25px;
 }
 
 #links{
-    display: flex;
     position: fixed;
-    bottom: -17%;
-    left: 50%;
+    bottom: .4%;
+    left: 96%;
     transform: translateX(-50%);
+
 }
 
-#links button{
+button img{
+    width: 50px;
+    height: 50px;
+    position: fixed;
+}
+
+.linkimg{
+    width: 50px;
+    height: 50px;
     display: flex;
     border: none;
     background-color: transparent;
     cursor: pointer;
-    
+    margin: 12px;
 }
 
-#links img{
-    align-items: flex-end;
-    float: left;
-    width:  50px;
-    height: 50px;
-    object-fit: cover;
-}
-
-#animationspeed {
+#legenddiv {
+    display: flex;
     position: fixed;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 21px;
-    top: 115.5%;
-    left: 50.75%;
-    transform: translateX(-50%);
-    width: 100%;
-    text-align: center;
-}
-
-#legenddiv {position: fixed;
-    position: fixed;
-    top: 50%;
-    right: -52%;
-    transform: translate(-50%, -50%);
+    top: 0%;
+    height: 99%;
+    width: 20%;
 }
 
 #legendtxt {
-    font-size: x-large;
-    font-family: 'Courier New', Courier, monospace;
+    font-size: 34px;;
+    color: white;
     position: fixed;
-    top: 2%;
-    left: 49%;
+    top: 37%;
+    left: 10%;
     transform: translateX(-50%);
+    z-index: 3;
 }
 
 .legend{
@@ -194,35 +194,90 @@ canvas {
     left: 27.5%;
 }
 
-#legendend{
-    top: 42%;
-    left: 27.5%;
+#legenddiv{
+    position: fixed;
+    top: 0%;
+    width: 20%;
+    height: 99.35%;
+    background-color: rgba(0,0,0, .3);
 }
+
+#navdiv{
+    height: 17%;
+    width: 80%;
+    position: fixed;
+    bottom: .4%;
+    right: 0%;
+    background-color: rgba(0,0,0, 0.1)
+}
+
+#legendcanvas{
+    box-shadow: none;
+    position: fixed;
+    top: 43%;
+    left: 3.8%;
+}
+
+#start{
+    font-size: inherit;
+    left: 7%;
+    top: 43.5%;
+    font-weight: 100;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    position: fixed;
+}
+
+#end{
+    font-size: inherit;
+    left: 7%;
+    top: 49%;
+    font-weight: 100;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    position: fixed;
+}
+
 /*!*****************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/slider.css ***!
   \*****************************************************************************************************/
 .slider {
-  -webkit-appearance: none;  
   appearance: none;
   width: 100%;
-  height: 20px;
+  height: 10px;
   background: #d3d3d3; 
   outline: none; 
   opacity: 0.7; 
-  -webkit-transition: .2s; 
   transition: opacity .2s;
-  border-radius: 7px;
-  box-shadow: 6px 6px 5px darkgrey
 }
 
-
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background-color: #8ffe09;
+  border: 1px white;
+  width: 18px;
+  height: 18px;
+  border-radius: 10px;
+}
 
 .slidecontainer {
   position: fixed;
-  top: 109%;
+  top: 90%;
+  left: 10%;
+  transform: translateX(-50%);
+  width: 200px;
+}
+
+#animationspeed {
+  position: fixed;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: medium;
+  text-align: center;
+  top: 120%;
   left: 50%;
   transform: translateX(-50%);
-  width: 250px;
+  width: 100%;
 }
 /*!****************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/modal.css ***!
@@ -237,11 +292,9 @@ canvas {
     left: 50%;
     transform: translate(-50%, -50%) scale(0);
     transition: 200ms ease-in-out;
-    border: 1px solid black;
-    border-radius: 10px;
     z-index: 10;
-    background-color: white;
-    width: 800px;
+    background-color: "black";
+    width: 1000px;
     max-width: 80%;
 }
 
@@ -255,25 +308,29 @@ canvas {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid white;
 }
 
 .modal-header .title{
-    font-size: 1.25rem;
+    font-size: 2.5rem;
     font-weight: bold;
+    color: white;
 }
 
 .modal-header .close-button{
     cursor: pointer;
     border: none;
     background: none;
-    font-size: 1.25rem;
+    font-size: 2rem;
     font-weight: bold;
+    color: white;
 }
 
 .modal-body {
     padding: 10px 15px;
-    font-family:'Courier New', Courier, monospace;
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight: larger;
+    color: white;
 }
 
 #overlay{
@@ -284,7 +341,7 @@ canvas {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0,0,0,.5);
+    background-color: rgba(0,0,0,.85);
     pointer-events: none;
     height: auto;
     width: auto;
@@ -293,6 +350,17 @@ canvas {
 #overlay.active {
     opacity: 1;
     pointer-events: all;
+}
+
+div p{
+    line-height: 2em;
+    font-size: larger;
+}
+
+#info {
+    position: fixed;
+    top: -.3%;
+    right: .8%;
 }
 /*!*************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss ***!

@@ -1,30 +1,39 @@
+@font-face {
+    font-family: 'Futurism';
+    src: url('../../dist/fonts/Futurism.otf') format('woff2');
+  }
+
 html, body {
     margin: 0;
     height: 100%;
+    user-select: none;
 }
 
 body {
     display: grid;
     grid-template-columns: 20% 20% 20% 20% 20%;
     grid-template-rows: 20% 20% 20% 20% 20%;
-    background-image: url(https://img.freepik.com/free-vector/white-clean-hexagonal-medical-concept_1017-29801.jpg?w=2000);
+    background-image: url('../../images/blueGradient.jpg');
     background-size: cover;
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Futurism';
 }
 
 #title{
     position: fixed;
-    left: 50%;
-    top: 4%;
+    font-family: "Futurism";
+    left: 38%;
+    top: -5%;
     transform: translateX(-50%);
     width: 88%;
+    z-index: 11;
+    pointer-events: none;
 }
    
 h1{
-    font-size: 7vw;
-    color: #106fa1eb;
-    /* color: rgb(90, 89, 89); */
-    text-shadow: 3px 3px 10px rgb(88, 88, 88)
+    font-size: 7.5rem;
+    color: white;
+    text-shadow: 5px 5px 3px rgb(0 0 0 / 51%);
+    pointer-events: none;
 }
 
 div {
@@ -33,84 +42,75 @@ div {
 }
 
 canvas {
-   border-style: solid;
-    border-width: 1px;
-    border-radius: 7px;
-    border-color: black;
-    box-shadow: 25px 25px 21px darkgrey;
+    box-shadow: 10px 10px 10px rgb(0, 0, 0, .2);
 }
+
 #animators {
-    position: fixed;
-    top: 92%;
-    left: 69%;
+    position: relative;
+    top: 84%;
+    left: 50%;
+    z-index: 3;
+    transform: translateX(-50%);
 }
 
 #canvasdiv {    
     position: fixed;
     top: 50%;
-    left: 38%;
+    left: 50%;
     transform: translate(-50%, -50%);
 }
 
 .button {
-    font-size: larger;
-    font-family: Courier New;
+    font-size: medium;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
     margin: 5px;
-    border: none;
-    background-color: #d3d3d3;
-    border-radius: 7px;
-    box-shadow: 6px 6px 5px darkgrey
+    border: 1px solid white;
+    background-color: rgba(255,255,255, .2);
+    border-radius: 20px;
+    padding: 3px 25px;
 }
 
 #links{
-    display: flex;
     position: fixed;
-    bottom: -17%;
-    left: 50%;
+    bottom: .4%;
+    left: 96%;
     transform: translateX(-50%);
+
 }
 
-#links button{
+button img{
+    width: 50px;
+    height: 50px;
+    position: fixed;
+}
+
+.linkimg{
+    width: 50px;
+    height: 50px;
     display: flex;
     border: none;
     background-color: transparent;
     cursor: pointer;
-    
+    margin: 12px;
 }
 
-#links img{
-    align-items: flex-end;
-    float: left;
-    width:  50px;
-    height: 50px;
-    object-fit: cover;
-}
-
-#animationspeed {
+#legenddiv {
+    display: flex;
     position: fixed;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 21px;
-    top: 115.5%;
-    left: 50.75%;
-    transform: translateX(-50%);
-    width: 100%;
-    text-align: center;
-}
-
-#legenddiv {position: fixed;
-    position: fixed;
-    top: 50%;
-    right: -52%;
-    transform: translate(-50%, -50%);
+    top: 0%;
+    height: 99%;
+    width: 20%;
 }
 
 #legendtxt {
-    font-size: x-large;
-    font-family: 'Courier New', Courier, monospace;
+    font-size: 34px;;
+    color: white;
     position: fixed;
-    top: 2%;
-    left: 49%;
+    top: 37%;
+    left: 10%;
     transform: translateX(-50%);
+    z-index: 3;
 }
 
 .legend{
@@ -138,7 +138,46 @@ canvas {
     left: 27.5%;
 }
 
-#legendend{
-    top: 42%;
-    left: 27.5%;
+#legenddiv{
+    position: fixed;
+    top: 0%;
+    width: 20%;
+    height: 99.35%;
+    background-color: rgba(0,0,0, .3);
+}
+
+#navdiv{
+    height: 17%;
+    width: 80%;
+    position: fixed;
+    bottom: .4%;
+    right: 0%;
+    background-color: rgba(0,0,0, 0.1)
+}
+
+#legendcanvas{
+    box-shadow: none;
+    position: fixed;
+    top: 43%;
+    left: 3.8%;
+}
+
+#start{
+    font-size: inherit;
+    left: 7%;
+    top: 43.5%;
+    font-weight: 100;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    position: fixed;
+}
+
+#end{
+    font-size: inherit;
+    left: 7%;
+    top: 49%;
+    font-weight: 100;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    position: fixed;
 }

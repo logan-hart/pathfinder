@@ -21,17 +21,16 @@ document.addEventListener("DOMContentLoaded", function () {
   window.Algorithm = Algorithm;
   window.Legend = Legend;
 
-  graphcanvas.width = 940;
-  graphcanvas.height = 600;
+  graphcanvas.width = 1250;
+  graphcanvas.height = 750;
+  legendcanvas.width = 100;
 
-  legendcanvas.width = 293;
-  legendcanvas.height = 600;
 
-  ctx.fillRect(0, 0, 970, 600);
+  ctx.fillRect(0, 0, 1250, 750);
   ctx.font = "20px helvetica"
   
-  ctx2.fillStyle = "#fbfbfb";
-  ctx2.fillRect(0, 0, 970, 600);
+  ctx2.fillStyle = "rgba(0,0,0, 0)";
+  ctx2.fillRect(0, 0, 40, 80);
 
   g = new Graph
   g.draw(ctx)
@@ -113,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
     e.preventDefault();
     let [currentX, currentY] = getMousePosition(graphcanvas, e)
     let distance = Math.sqrt(Math.pow(currentX- downPos[0], 2) + Math.pow(currentY - startY, 2));
-    if (distance <= 3){
+    if (distance < 1){
       Object.keys(g.nodeHitBoxes).forEach (function (el){
         let hitbox = g.nodeHitBoxes[el]
         if (startX > hitbox[2] && startX < hitbox[3] && startY > hitbox[0] && startY < hitbox[1]){

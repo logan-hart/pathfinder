@@ -42,7 +42,7 @@ Path.prototype.calculateWeight = function (){
 Path.prototype.draw = function(ctx){
     if(this.status === 'shortest'){
         ctx.beginPath();
-        ctx.strokeStyle = '#0288d1'
+        ctx.strokeStyle = '#00ACDF'
         ctx.lineWidth = 12
         ctx.moveTo(this.startPos[0], this.startPos[1]);
         ctx.lineTo(this.endPos[0], this.endPos[1]);
@@ -60,15 +60,12 @@ Path.prototype.draw = function(ctx){
         ctx.strokeStyle = 'red'
         ctx.lineWidth = 6
     }  else if(this.status === 'shortest'){
-        ctx.strokeStyle = '#0288d1'
+        ctx.strokeStyle = 'lightblue'
         ctx.lineWidth = 6
     } 
-    ctx.moveTo(this.startPos[0], this.startPos[1]);
-    ctx.lineTo(this.endPos[0], this.endPos[1]);
-    ctx.stroke();
 
     ctx.beginPath();
-    ctx.strokeStyle = 'black'
+    ctx.strokeStyle = 'white'
     ctx.lineWidth = 1
     ctx.moveTo(this.startPos[0], this.startPos[1]);
     ctx.lineTo(this.endPos[0], this.endPos[1]);

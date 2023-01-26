@@ -8,11 +8,9 @@
     left: 50%;
     transform: translate(-50%, -50%) scale(0);
     transition: 200ms ease-in-out;
-    border: 1px solid black;
-    border-radius: 10px;
     z-index: 10;
-    background-color: white;
-    width: 800px;
+    background-color: "black";
+    width: 1000px;
     max-width: 80%;
 }
 
@@ -26,25 +24,29 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid white;
 }
 
 .modal-header .title{
-    font-size: 1.25rem;
+    font-size: 2.5rem;
     font-weight: bold;
+    color: white;
 }
 
 .modal-header .close-button{
     cursor: pointer;
     border: none;
     background: none;
-    font-size: 1.25rem;
+    font-size: 2rem;
     font-weight: bold;
+    color: white;
 }
 
 .modal-body {
     padding: 10px 15px;
-    font-family:'Courier New', Courier, monospace;
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight: larger;
+    color: white;
 }
 
 #overlay{
@@ -55,7 +57,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0,0,0,.5);
+    background-color: rgba(0,0,0,.85);
     pointer-events: none;
     height: auto;
     width: auto;
@@ -64,4 +66,15 @@
 #overlay.active {
     opacity: 1;
     pointer-events: all;
+}
+
+div p{
+    line-height: 2em;
+    font-size: larger;
+}
+
+#info {
+    position: fixed;
+    top: -.3%;
+    right: .8%;
 }

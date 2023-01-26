@@ -1,7 +1,7 @@
 function Node(name, pos){   
     this.name = name
     this.pos = pos
-    this.radius = 10
+    this.radius = 11
     this.neighbors = {}
     this.status = 'unvisited'
     this.selected = null
@@ -9,28 +9,25 @@ function Node(name, pos){
 }
 
 Node.prototype.draw = function(ctx){
-    const a = 2 * Math.PI / 6;
-    const r = 13;
+
     ctx.beginPath();
-    for (var i = 0; i < 6; i++) {
-        ctx.lineTo(this.pos[0] + r * Math.cos(a * i), this.pos[1] + r * Math.sin(a * i));
-    }
+    ctx.arc(this.pos[0], this. pos[1], this.radius, 0, Math.PI * 2, true);
     if (this.selected === null){
-        ctx.strokeStyle = "black";
+        ctx.strokeStyle = "white";
         ctx.lineWidth = 3;
     } else if (this.selected === 'start'){
-        ctx.strokeStyle = "green";
+        ctx.strokeStyle = "#8ffe09";
         ctx.lineWidth = 7;
     } else if (this.selected === 'end'){
-        ctx.strokeStyle = "red";
+        ctx.strokeStyle = "#9900FF";
         ctx.lineWidth = 7;
     } 
     if (this.status !== 'visited'){
-        ctx.fillStyle = 'white'
+        ctx.fillStyle = '#8ab0da'
     } else {
-        ctx.fillStyle = '#0288d1'
+        ctx.fillStyle = '#65b00b'
     }
-    ctx.closePath();
+
     ctx.stroke();
     ctx.fill()
     
