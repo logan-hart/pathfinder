@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Futurism';
-    src: url('../../dist/fonts/Futurism.otf') format('woff2');
+    src: url('../dist/fonts/Futurism.otf') format('woff2');
   }
 
 html, body {
@@ -13,7 +13,7 @@ body {
     display: grid;
     grid-template-columns: 20% 20% 20% 20% 20%;
     grid-template-rows: 20% 20% 20% 20% 20%;
-    background-image: url('../../images/blueGradient.jpg');
+    background-image: url('../images/blueGradient.jpg');
     background-size: cover;
     font-family: 'Futurism';
 }
@@ -73,10 +73,9 @@ canvas {
 
 #links{
     position: fixed;
-    bottom: .4%;
+    bottom: 1.4%;
     left: 96%;
     transform: translateX(-50%);
-
 }
 
 button img{
@@ -147,7 +146,7 @@ button img{
 }
 
 #navdiv{
-    height: 17%;
+    height: 19%;
     width: 80%;
     position: fixed;
     bottom: .4%;
