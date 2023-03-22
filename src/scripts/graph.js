@@ -3,12 +3,18 @@ function Graph(){
     // this.numNodes = numNodes
     this.nodeHitBoxes = {}
     this.startingNodes = [
-        [ 350, 225 ],
-        [ 450, 450 ],
-        [ 650, 125 ],
-        [ 800, 550 ],
-        [ 1000, 150 ],
-        [ 1100, 375 ]]
+        [ 700, 100 ],
+        [ 600, 175 ],
+        [ 500, 250 ],
+        [ 400, 325 ],
+        [ 500, 400 ],
+        [ 600, 475 ],
+        [ 700, 550 ],
+        [ 800, 475 ],
+        [ 900, 400 ],
+        [ 1000, 325 ],
+        [ 900, 250 ],
+        [ 800, 175 ]]
     this.paths = []
     this.pathHitBoxes = []
     this.delay = 500
@@ -35,15 +41,33 @@ Graph.prototype.buildHitBoxes = function(){
 Graph.prototype.placePaths = function (){
     console.log(this)
     let nodePaths =[
-        [this.nodes[0], this.nodes[1], 'none'],
-        [this.nodes[0], this.nodes[2], 'none'],
-        [this.nodes[1], this.nodes[2], 'none'],
-        [this.nodes[1], this.nodes[3], 'none'],
-        [this.nodes[2], this.nodes[3], 'none'],
-        [this.nodes[2], this.nodes[4], 'none'],
-        [this.nodes[3], this.nodes[4], 'none'],
-        [this.nodes[3], this.nodes[5], 'none'],
-        [this.nodes[4], this.nodes[5], 'none']
+        [this.nodes[0], this.nodes[4], 'none'],
+        [this.nodes[0], this.nodes[8], 'none'],
+        [this.nodes[1], this.nodes[5], 'none'],
+        [this.nodes[1], this.nodes[9], 'none'],
+        [this.nodes[2], this.nodes[10], 'none'],
+        [this.nodes[3], this.nodes[7], 'none'],
+        [this.nodes[3], this.nodes[11], 'none'],
+        [this.nodes[4], this.nodes[8], 'none'],
+        [this.nodes[4], this.nodes[0], 'none'],
+        [this.nodes[5], this.nodes[9], 'none'],
+        [this.nodes[5], this.nodes[1], 'none'],
+        [this.nodes[6], this.nodes[10], 'none'],
+        [this.nodes[6], this.nodes[2], 'none'],
+        [this.nodes[7], this.nodes[11], 'none'],
+        [this.nodes[7], this.nodes[3], 'none'],
+        [this.nodes[8], this.nodes[0], 'none'],
+        [this.nodes[8], this.nodes[4], 'none'],
+        [this.nodes[9], this.nodes[1], 'none'],
+        // [this.nodes[2], this.nodes[4], 'none'],
+        // [this.nodes[8], this.nodes[10], 'none'],
+        // [this.nodes[1], this.nodes[7], 'none'],
+        // [this.nodes[5], this.nodes[11], 'none'],
+        [this.nodes[3], this.nodes[8], 'none'],
+        [this.nodes[3], this.nodes[10], 'none'],
+        [this.nodes[9], this.nodes[2], 'none'],
+        [this.nodes[9], this.nodes[4], 'none'],
+        
     ]
     let that = this
     nodePaths.forEach( function(nodePair){
@@ -102,8 +126,6 @@ Graph.prototype.clearSelected = function(){
     })
     
 }
-
-
 
 
 module.exports = Graph;

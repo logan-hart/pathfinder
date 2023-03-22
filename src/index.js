@@ -17,9 +17,9 @@ document.addEventListener("DOMContentLoaded", function () {
   window.ctx2 = ctx2
   window.Node = Node;
   window.Path = Path;
-  window.Graph = Graph;
-  window.Algorithm = Algorithm;
-  window.Legend = Legend;
+  // window.Graph = Graph;
+  // window.Algorithm = Algorithm;
+  // window.Legend = Legend;
 
   graphcanvas.width = 1250;
   graphcanvas.height = 750;

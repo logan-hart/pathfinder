@@ -50,6 +50,7 @@ Algorithm.prototype.determinePathing = function(){
             }
         })
     }
+    debugger
     this.path = path
 }
 
@@ -104,7 +105,8 @@ Algorithm.prototype.animateNodes = function(ctx){
         let that = this   
         let shortest = that.shortestPath()
           for (let i = 0; i < shortest.length -1; i++){
-              current = that.paths.find(path => path.parentNode.name === shortest[i] && path.childNode.name === shortest[i+1])
+                debugger
+              current = that.paths.find(path => (path.parentNode.name === shortest[i] && path.childNode.name === shortest[i+1]) || (path.childNode.name === shortest[i] && path.parentNode.name === shortest[i+1]))
               current.status = 'shortest'
               that.graph.draw(ctx)
           }

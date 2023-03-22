@@ -59,7 +59,7 @@ Algorithm.prototype.determinePathing = function(){
 }
 ```
 
-## Drag/Drop functionality
+## Drag/Drop functionality:
 
 To distinguish between Click and drag/drop functionality the location of the mouse-down event is compared to the location of the mouse-up event.
 
@@ -117,7 +117,7 @@ let is_dragging = false
 
 ![](./images/wireframe.png)
 
-# This project implements with the following technologies:
+# This project implements the following technologies:
 
 1. Canvas for rendering the interactive graph
 2. Webpack to bundle the source JavaScript code 
