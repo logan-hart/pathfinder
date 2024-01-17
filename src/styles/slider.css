@@ -8,6 +8,10 @@
   transition: opacity .2s;
 }
 
+.slider:hover{
+  cursor: pointer;
+}
+
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   background-color: #8ffe09;
@@ -16,6 +20,11 @@
   height: 18px;
   border-radius: 10px;
 }
+
+.slider:hover::-webkit-slider-thumb {
+  border: 2px solid white;
+}
+
 
 .slidecontainer {
   position: fixed;

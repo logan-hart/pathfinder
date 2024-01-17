@@ -125,6 +125,13 @@ canvas {
     background-color: rgba(255,255,255, .2);
     border-radius: 20px;
     padding: 3px 25px;
+    cursor: pointer;
+}
+
+.button:hover{
+    color: white;
+    border: 1px solid blue;
+    background-color: rgba(0,0,0, .2)
 }
 
 #links{
@@ -148,6 +155,11 @@ button img{
     background-color: transparent;
     cursor: pointer;
     margin: 12px;
+}
+
+.linkimg:hover{
+    color: red;
+
 }
 
 #legenddiv {
@@ -250,6 +262,10 @@ button img{
   transition: opacity .2s;
 }
 
+.slider:hover{
+  cursor: pointer;
+}
+
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   background-color: #8ffe09;
@@ -258,6 +274,11 @@ button img{
   height: 18px;
   border-radius: 10px;
 }
+
+.slider:hover::-webkit-slider-thumb {
+  border: 2px solid white;
+}
+
 
 .slidecontainer {
   position: fixed;
