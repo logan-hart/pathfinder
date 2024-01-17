@@ -63,24 +63,24 @@ html, body {
     margin: 0;
     height: 100%;
     user-select: none;
+
 }
 
 body {
-    display: grid;
+    /* display: grid;
     grid-template-columns: 20% 20% 20% 20% 20%;
-    grid-template-rows: 20% 20% 20% 20% 20%;
+    grid-template-rows: 20% 20% 20% 20% 20%; */
     background-image: url('../images/blueGradient.jpg');
     background-size: cover;
     font-family: 'Futurism';
+    overflow: scroll;
 }
 
 #title{
-    position: fixed;
+    position: absolute;
     font-family: "Futurism";
-    left: 38%;
-    top: -5%;
-    transform: translateX(-50%);
-    width: 88%;
+    top: 0;
+    left: 0;
     z-index: 11;
     pointer-events: none;
 }
@@ -110,7 +110,7 @@ canvas {
 }
 
 #canvasdiv {    
-    position: fixed;
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);

@@ -39,7 +39,6 @@ Graph.prototype.buildHitBoxes = function(){
 }
 
 Graph.prototype.placePaths = function (){
-    console.log(this)
     let nodePaths =[
         [this.nodes[0], this.nodes[4], 'none'],
         [this.nodes[0], this.nodes[8], 'none'],
